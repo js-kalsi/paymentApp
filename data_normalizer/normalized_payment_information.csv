@@ -54,7 +54,7 @@ Sandra,Ramirez,overdue,1701302400,2024-11-04,1517 Fleming Manors,Suite 607,West 
 Sarah,Garcia,overdue,1700524800,2024-11-10,87800 Castillo Valleys,Apt. 463,North Cathy,KE,Hawaii,78659,+14795180319,gcoffey@yahoo.com,USD,14.74,7.25,1862.97
 Sophia,Trujillo,overdue,1683676800,2024-12-02,675 Darrell Hollow,Apt. 031,East Garrettfort,TR,North Dakota,76809,+15432835409,wmeyer@williams.info,USD,25.04,7.25,1873.66
 Dennis,Parker,pending,1728604800,2024-12-13,822 Rivera Fords Suite 957,Suite 955,South Meaganmouth,NR,Maryland,87627,+19663712673,jessica22@yahoo.com,USD,10.06,7.25,2303.6
-Sharon,Mason,pending,1680307200,2024-12-25,60240 Joshua Inlet,Suite 506,Thomastown,DE,Hawaii,43554,+17769512657,kennethdaniel@gmail.com,USD,23,7.25,461.32
+Sharon,Mason,pending,1680307200,2024-12-25,60240 Joshua Inlet,Suite 506,Thomastown,DE,Hawaii,43554,+17769512657,kennethdaniel@gmail.com,USD,23.0,7.25,461.32
 Christopher,Graham,overdue,1685836800,2024-11-01,84523 Christopher Harbors Apt. 018,Apt. 538,Heatherbury,CN,Kentucky,75260,+18533628168,herbert66@collins.com,USD,20.56,7.25,1798.39
 Michael,Armstrong,overdue,1696291200,2024-11-10,20677 Paul Loaf,Apt. 930,Lake Ronald,DJ,North Carolina,6739,+16461517184,norrissarah@yahoo.com,USD,21.39,7.25,3516.17
 Eric,Young,pending,1729296000,2024-12-31,513 Molly Village Suite 587,Suite 995,New Dianeborough,BF,Connecticut,36584,+14785746530,dickersonstephen@yahoo.com,USD,13.21,7.25,4924.88
@@ -125,7 +125,7 @@ Catherine,Hudson,overdue,1688428800,2024-11-20,0131 Brian Fords,Apt. 586,Martine
 Peter,Brown,pending,1724112000,2024-12-29,231 Kristin Lodge Suite 138,Suite 471,Wrightport,RW,North Dakota,44734,+16658347490,gabrielle63@henderson.info,USD,5.66,7.25,3571.81
 Tyler,Juarez,overdue,1687996800,2024-11-08,92858 Clayton Course Apt. 640,Suite 361,Ericside,SZ,Virginia,56557,+19537272042,douglaskirby@gmail.com,USD,24.32,7.25,1920.3
 Derek,Schwartz,overdue,1685232000,2024-11-08,9103 Vicki Drive,Suite 141,New Shawnport,TM,Illinois,50024,+15999553102,hjackson@yahoo.com,USD,22.46,7.25,1055.28
-Jessica,Watson,overdue,1704499200,2024-11-05,73449 James Locks Suite 397,Suite 953,Port Anne,LU,Montana,19894,+11965227435,alvarezamanda@yahoo.com,USD,18.5,7.25,4871
+Jessica,Watson,overdue,1704499200,2024-11-05,73449 James Locks Suite 397,Suite 953,Port Anne,LU,Montana,19894,+11965227435,alvarezamanda@yahoo.com,USD,18.5,7.25,4871.0
 Terri,Miller,overdue,1699142400,2024-11-04,7639 Jennifer Ways,Apt. 282,East Ashleyside,FM,North Carolina,98152,+17134375354,leerobert@yahoo.com,USD,15.65,7.25,2006.99
 Stacey,Cook,pending,1705449600,2024-12-07,5314 John Oval,Suite 078,Johnbury,LS,Washington,69576,+15550114889,swalls@ellis.com,USD,29.59,7.25,2207.72
 Lori,Dawson,overdue,1694563200,2024-11-20,464 Brooks Port,Apt. 582,Heatherfurt,DZ,Georgia,84140,+14748755605,garrettwilliam@buck.com,USD,25.2,7.25,3826.69
@@ -172,7 +172,7 @@ Kenneth,Palmer,overdue,1724716800,2024-11-08,6263 Johnson Circle,Apt. 232,Morgan
 Marcus,Hernandez,pending,1721952000,2024-12-20,542 White Throughway,Suite 513,Gonzalezhaven,QA,Illinois,92453,+11411528674,lauriealvarez@hale-boyle.biz,USD,18.75,7.25,762.48
 Olivia,Blankenship,pending,1725062400,2024-12-22,5035 Kim Ports,Suite 480,East Brittany,ES,Virginia,44954,+11922849506,melissarogers@hicks.com,USD,13.95,7.25,4719.72
 Tiffany,Stokes,overdue,1701820800,2024-11-18,88646 Benjamin Road,Suite 493,Timothyberg,NG,Florida,44161,+18470573842,frankedwards@yahoo.com,USD,8.19,7.25,1872.89
-Jorge,Smith,pending,1686960000,2024-12-20,59536 Joshua Flat,Suite 743,Port Johnathan,TL,Indiana,75606,+15580217872,edwardsjulian@hotmail.com,USD,28.4,7.25,2695
+Jorge,Smith,pending,1686960000,2024-12-20,59536 Joshua Flat,Suite 743,Port Johnathan,TL,Indiana,75606,+15580217872,edwardsjulian@hotmail.com,USD,28.4,7.25,2695.0
 Jimmy,Rojas,pending,1732147200,2024-12-07,87631 Erin Tunnel,Apt. 904,Mathisbury,NL,Maine,17281,+12446741355,wrightterri@hotmail.com,USD,22.74,7.25,1619.96
 Christopher,Rodriguez,overdue,1717804800,2024-11-06,9076 Smith Haven,Suite 655,Kayleeburgh,EC,South Dakota,46920,+17343454075,harold88@gmail.com,USD,8.8,7.25,2919.94
 Monica,Gutierrez,pending,1695772800,2024-12-25,54694 Bradley Villages Apt. 313,Apt. 280,East Makaylaburgh,TO,Oregon,32165,+15064138801,edward73@yahoo.com,USD,18.34,7.25,2082.04
@@ -270,7 +270,7 @@ Danny,Beasley,overdue,1715731200,2024-11-30,058 Freeman Forest,Apt. 488,East Sus
 Lisa,Henderson,overdue,1718841600,2024-11-19,11975 Brett Stravenue Apt. 214,Suite 262,Simpsonton,LC,Kentucky,13153,+17063984507,whiterachel@gmail.com,USD,18.14,7.25,4645.04
 Renee,Hunter,pending,1716249600,2024-12-24,49786 Julie Trail Apt. 015,Apt. 474,New Todd,KH,Louisiana,62337,+17239651443,amyhall@flores-anderson.com,USD,17.93,7.25,988.43
 Natalie,Shelton,pending,1701129600,2024-12-07,781 David Lodge Suite 908,Suite 366,Ericton,TM,Hawaii,79868,+13389013445,paulguerra@hotmail.com,USD,21.69,7.25,3989.79
-Whitney,Arnold,overdue,1728777600,2024-11-23,99810 Zamora Court Suite 460,Suite 862,Connertown,AO,North Carolina,10094,+17327423919,jonessteven@thomas-cannon.com,USD,15.31,7.25,751
+Whitney,Arnold,overdue,1728777600,2024-11-23,99810 Zamora Court Suite 460,Suite 862,Connertown,AO,North Carolina,10094,+17327423919,jonessteven@thomas-cannon.com,USD,15.31,7.25,751.0
 Deanna,Higgins,overdue,1699056000,2024-11-18,275 Susan Mountain,Apt. 487,East Johnborough,MD,North Carolina,9520,+14572385876,jessica33@sweeney.com,USD,20.79,7.25,558.9
 David,Sandoval,overdue,1672790400,2024-11-07,08808 Nathan Roads Suite 500,Apt. 759,East Craig,KW,New Hampshire,77513,+15927393878,michael87@mendoza.com,USD,23.95,7.25,1846.47
 Lindsay,Glass,overdue,1727481600,2024-11-07,32527 Marcus Spur Apt. 478,Apt. 723,Port Donald,MA,Missouri,59799,+14338216994,millernatasha@hotmail.com,USD,19.18,7.25,1637.51
@@ -317,7 +317,7 @@ Patrick,White,overdue,1677801600,2024-11-26,6967 Brown Gateway Apt. 015,Suite 10
 Mario,Mercado,pending,1722211200,2024-12-23,327 Debra Parkway Apt. 780,Suite 913,Lewisview,TZ,California,17921,+19410766506,courtney52@mason-morgan.com,USD,18.63,7.25,1338.84
 Patricia,Bond,overdue,1694304000,2024-11-04,9655 Cynthia Mountain,Suite 974,Cherylmouth,AE,Illinois,29593,+14363464675,rjohnson@hotmail.com,USD,28.47,7.25,1987.03
 Joseph,Hughes,overdue,1726704000,2024-11-11,841 Bailey Inlet,Suite 598,Kylechester,LK,Ohio,17351,+17013589835,jeremyodonnell@savage-anderson.com,USD,9.52,7.25,3842.78
-Miranda,Jones,overdue,1724371200,2024-11-21,9983 Tanya Trail,Suite 203,Sydneyview,BG,Maryland,59003,+14280844647,todd14@gmail.com,USD,17.8,7.25,3913
+Miranda,Jones,overdue,1724371200,2024-11-21,9983 Tanya Trail,Suite 203,Sydneyview,BG,Maryland,59003,+14280844647,todd14@gmail.com,USD,17.8,7.25,3913.0
 Nathaniel,Cole,overdue,1720051200,2024-11-30,2099 Webb Unions Apt. 507,Suite 715,East Rachel,ZW,Louisiana,14125,+11725569704,john45@yahoo.com,USD,5.17,7.25,3704.31
 Kayla,Villa,overdue,1685923200,2024-11-28,3145 Seth Grove Apt. 074,Apt. 662,Michellehaven,CO,Vermont,51174,+13785236089,fredosborne@nunez.com,USD,5.96,7.25,260.88
 Xavier,Clark,overdue,1696377600,2024-11-26,0380 Jose Fields,Suite 467,Josephchester,ES,New Jersey,19286,+16941851343,hayesanna@yahoo.com,USD,12.36,7.25,595.43
@@ -333,7 +333,7 @@ Vicki,Miller,overdue,1686182400,2024-11-13,39334 Alicia River Suite 737,Apt. 652
 Annette,Duran,overdue,1680998400,2024-11-17,7212 Fitzpatrick Hollow Apt. 096,Apt. 430,Kimfort,KR,Pennsylvania,19033,+14961104840,ctorres@patterson-jones.com,USD,20.41,7.25,289.83
 Susan,Rodriguez,overdue,1700870400,2024-11-30,32326 Moore Plaza Suite 723,Suite 768,New Nancyton,IE,Kansas,29873,+14401895883,greerbrian@aguirre-gomez.org,USD,8.16,7.25,53.03
 Michael,White,pending,1718150400,2024-12-12,781 Garcia Oval,Apt. 216,Singletonburgh,SA,Maine,68146,+13622319481,smoses@mitchell-goodman.net,USD,15.26,7.25,1594.03
-Christina,Mills,overdue,1722643200,2024-11-13,054 Courtney Divide,Apt. 314,Lisafurt,AZ,Florida,98014,+16256772234,aburke@yahoo.com,USD,18,7.25,4795.47
+Christina,Mills,overdue,1722643200,2024-11-13,054 Courtney Divide,Apt. 314,Lisafurt,AZ,Florida,98014,+16256772234,aburke@yahoo.com,USD,18.0,7.25,4795.47
 Theresa,Miller,overdue,1682726400,2024-11-13,058 White Wells Suite 507,Suite 320,South Brett,KR,Kansas,67313,+14712473440,gordoncastro@hotmail.com,USD,24.19,7.25,1935.34
 Jessica,Atkins,pending,1677283200,2024-12-11,461 Carla Islands,Apt. 238,Port Toddmouth,ZA,Oklahoma,41538,+15340523072,antonio75@hill.com,USD,7.72,7.25,2529.01
 Michael,Yang,overdue,1702944000,2024-11-02,1155 Christopher Lock Apt. 829,Suite 765,West Cynthiaside,FJ,Massachusetts,6260,+19052729796,pjackson@freeman.com,USD,12.48,7.25,4947.24
@@ -375,7 +375,7 @@ James,Kelly,overdue,1684713600,2024-12-04,836 Jessica Passage Apt. 666,Suite 965
 Shawn,Bradley,pending,1719273600,2024-12-31,191 Ronald Junction,Apt. 479,Youngborough,DZ,Montana,31102,+15782439405,krystalbishop@hotmail.com,USD,10.32,7.25,1997.58
 Sergio,Bender,pending,1704758400,2024-12-05,02039 Donna Manors,Apt. 163,Mckayburgh,BG,Louisiana,35353,+17304104768,gwilliams@young-anderson.net,USD,26.02,7.25,2305.46
 Joshua,Torres,overdue,1678406400,2024-12-04,6168 Miles Locks Suite 882,Apt. 657,Leachstad,KW,Louisiana,60048,+14728887126,christina47@yahoo.com,USD,24.2,7.25,4119.22
-Caitlin,Fox,pending,1700524800,2024-12-30,1135 Cohen Grove Suite 597,Suite 422,Lauramouth,BY,Rhode Island,78187,+19495059657,brian40@gmail.com,USD,25,7.25,3837.27
+Caitlin,Fox,pending,1700524800,2024-12-30,1135 Cohen Grove Suite 597,Suite 422,Lauramouth,BY,Rhode Island,78187,+19495059657,brian40@gmail.com,USD,25.0,7.25,3837.27
 John,Moore,overdue,1693094400,2024-11-09,70289 John Light,Suite 641,Port Michaelborough,CF,Pennsylvania,43261,+19715343747,williamsmelissa@gmail.com,USD,17.22,7.25,3379.98
 Jennifer,Shaw,overdue,1730678400,2024-11-16,16435 Livingston Oval,Suite 018,Jamesborough,IQ,Nebraska,56955,+13647677483,christopher89@yahoo.com,USD,21.82,7.25,4449.3
 Benjamin,Rhodes,overdue,1716076800,2024-12-03,928 Bowman Flats,Suite 342,Melissabury,MX,Rhode Island,55970,+17855771014,millertammy@yahoo.com,USD,28.57,7.25,1219.84
@@ -413,7 +413,7 @@ Katherine,Hall,pending,1719792000,2024-12-28,0256 Timothy Cliff,Suite 226,Jeremy
 Justin,Carter,overdue,1679097600,2024-11-22,82339 Mindy Square,Suite 443,Rachelbury,GY,Maine,99656,+11904148882,fhayes@bailey.info,USD,8.38,7.25,4713.43
 Henry,Baldwin,overdue,1707955200,2024-11-24,38275 Chad Inlet,Suite 168,East Mary,MD,California,53926,+14497597405,burtonclifford@yahoo.com,USD,24.02,7.25,4675.64
 Natalie,Stewart,overdue,1696982400,2024-11-28,87619 Stephanie Forges Suite 183,Suite 077,Port Erin,VN,Montana,31560,+19536319485,mmartin@gray-hayes.net,USD,23.01,7.25,3252.93
-Julia,Smith,pending,1728086400,2024-12-28,48750 Shirley Stream Apt. 102,Apt. 245,Chloeton,TD,Louisiana,19429,+16354531830,phillip24@gmail.com,USD,22.02,7.25,4048
+Julia,Smith,pending,1728086400,2024-12-28,48750 Shirley Stream Apt. 102,Apt. 245,Chloeton,TD,Louisiana,19429,+16354531830,phillip24@gmail.com,USD,22.02,7.25,4048.0
 Rodney,Carr,pending,1728691200,2024-12-13,63235 Felicia Hill,Apt. 600,Shannonshire,BJ,Indiana,68489,+17425178123,lauraanderson@green-maldonado.com,USD,12.22,7.25,305.46
 Christine,Mack,overdue,1729296000,2024-12-02,930 Sanford Falls,Apt. 540,New Jasonstad,WS,Kentucky,65013,+13120350457,rebekahknight@garcia.net,USD,17.36,7.25,1199.16
 Wayne,Newman,overdue,1715385600,2024-11-02,2486 Brown Extensions Suite 803,Apt. 071,North Ericafurt,EE,Michigan,73109,+16715054284,jaredjames@holland.info,USD,5.06,7.25,3755.74
@@ -421,7 +421,7 @@ Gregory,Butler,overdue,1729555200,2024-11-19,5260 Edwards Garden Apt. 338,Apt. 6
 Melissa,Greer,overdue,1724976000,2024-11-19,15226 Moon Route Apt. 112,Apt. 605,Port Teresaville,MK,Wyoming,23082,+12981813035,pamelamorris@walsh.info,USD,25.85,7.25,96.68
 David,Nelson,overdue,1680652800,2024-11-24,21804 Padilla Ranch,Suite 502,South Tyler,TT,Colorado,89538,+19825142150,jason75@gmail.com,USD,15.56,7.25,3740.37
 Michelle,Vazquez,overdue,1725840000,2024-11-15,87177 Nicholas Summit Suite 639,Suite 229,Juliaborough,KH,Montana,21238,+12494633005,ffoster@allen.net,USD,25.54,7.25,3123.33
-Patrick,Wood,overdue,1717545600,2024-11-05,1570 Brown Divide,Apt. 202,North Christopherbury,ST,North Carolina,91682,+15099317707,thompsontaylor@yahoo.com,USD,20.68,7.25,767
+Patrick,Wood,overdue,1717545600,2024-11-05,1570 Brown Divide,Apt. 202,North Christopherbury,ST,North Carolina,91682,+15099317707,thompsontaylor@yahoo.com,USD,20.68,7.25,767.0
 Christopher,Pierce,overdue,1712361600,2024-11-10,0152 Newman Station,Apt. 110,Port Katelyn,SZ,New Jersey,96813,+16557473402,christophermoore@yahoo.com,USD,19.83,7.25,3217.7
 Morgan,Burgess,overdue,1725148800,2024-11-16,32974 Jonathan Bypass Suite 159,Apt. 854,Sarahberg,GH,Texas,94949,+11318299817,shawnvincent@hotmail.com,USD,13.36,7.25,3424.77
 Joann,Cooper,overdue,1724630400,2024-11-27,774 Ochoa Ports,Apt. 495,Ramostown,UA,South Dakota,90708,+12624531487,ograves@pitts.net,USD,26.04,7.25,853.65
@@ -503,7 +503,7 @@ James,Castro,pending,1693180800,2024-12-30,006 Katie Pass,Suite 065,Halestad,CN,
 Cynthia,Johnson,overdue,1683331200,2024-11-06,34931 Bradley Common,Suite 284,Lake Karen,SV,New Jersey,17480,+15117685298,monicaosborne@massey.com,USD,14.84,7.25,2682.86
 Justin,Hill,pending,1683417600,2024-12-29,63499 Wilson Street Apt. 131,Apt. 324,South Ryanhaven,ME,Texas,22004,+17455898921,mclark@terrell.com,USD,23.62,7.25,2087.11
 Calvin,Tran,overdue,1699142400,2024-11-11,166 Schmidt Stravenue,Suite 084,South Nicoleshire,CN,California,98323,+13025017137,codyhudson@yahoo.com,USD,12.3,7.25,2731.86
-Allen,Arnold,pending,1708128000,2024-12-22,7231 Mathews Road Suite 236,Apt. 595,New Charles,DZ,Oregon,41433,+15372800722,longmichelle@gmail.com,USD,21,7.25,783.81
+Allen,Arnold,pending,1708128000,2024-12-22,7231 Mathews Road Suite 236,Apt. 595,New Charles,DZ,Oregon,41433,+15372800722,longmichelle@gmail.com,USD,21.0,7.25,783.81
 Sean,Delgado,overdue,1690156800,2024-11-27,4254 Higgins Inlet Suite 041,Suite 587,New Karenborough,MC,Michigan,63443,+19590233317,wrightnichole@johnson.com,USD,18.42,7.25,2134.25
 Tabitha,Wong,overdue,1716854400,2024-11-20,0172 Nelson Curve,Apt. 314,East Amber,GB,Connecticut,89960,+13117655726,ihunter@brown.biz,USD,20.37,7.25,2781.47
 Timothy,Turner,pending,1690588800,2024-12-18,5698 Thomas Street Suite 901,Apt. 818,North Juliaton,BJ,New Jersey,60116,+14646704169,smithjoshua@gmail.com,USD,9.53,7.25,1006.5
@@ -617,7 +617,7 @@ Holly,Davila,pending,1672617600,2024-12-15,084 Knox Prairie,Apt. 727,New Maria,C
 Tammy,Smith,pending,1719619200,2024-12-06,94781 John Common Apt. 267,Apt. 132,Port Shelby,DK,Texas,11615,+15532646348,torresbrent@miller.com,USD,25.34,7.25,4864.21
 Matthew,Stewart,pending,1716163200,2024-12-09,04887 Rivera Ways,Suite 624,Melissaborough,CM,Maryland,13022,+13691460670,zobrien@stephens-jackson.com,USD,28.91,7.25,3494.96
 Eric,Williams,pending,1728345600,2024-12-26,4491 Eric Village Apt. 452,Suite 943,East Rachel,CI,South Carolina,33263,+19170854081,richard93@gmail.com,USD,13.89,7.25,3012.38
-David,Schneider,pending,1711670400,2024-12-19,573 Natalie Spring,Suite 492,North Vanessa,CZ,Texas,99224,+18841659604,zacharygray@yahoo.com,USD,8,7.25,456.86
+David,Schneider,pending,1711670400,2024-12-19,573 Natalie Spring,Suite 492,North Vanessa,CZ,Texas,99224,+18841659604,zacharygray@yahoo.com,USD,8.0,7.25,456.86
 Nicholas,Mejia,pending,1687996800,2024-12-25,36161 Michelle Courts Suite 372,Apt. 246,Jeremyberg,AL,Massachusetts,76012,+19204355787,craig68@gmail.com,USD,9.22,7.25,1048.17
 James,Howard,pending,1719705600,2024-12-12,6216 Joseph Circle Apt. 773,Apt. 828,North Caleb,NP,Florida,49674,+12111213451,jellis@gmail.com,USD,22.22,7.25,2445.23
 Anthony,Cardenas,pending,1693440000,2024-12-12,66970 Patricia Ville,Apt. 383,Gonzalezfort,NR,Nebraska,66042,+12045503505,michaelbrewer@yahoo.com,USD,8.3,7.25,4217.33
@@ -717,7 +717,7 @@ Briana,Schmidt,overdue,1690502400,2024-11-25,90954 Lynn Curve,Apt. 736,Maryport,
 William,Owens,overdue,1689120000,2024-11-12,5979 Johnson Plain,Suite 288,Cassandraview,IL,Michigan,76971,+15100703916,melissajames@jones-williams.net,USD,27.89,7.25,2469.97
 Johnny,Medina,pending,1689206400,2024-12-06,983 Torres Keys Apt. 614,Apt. 996,North Eddie,CH,Alabama,35750,+13254443039,michael71@ford.com,USD,16.89,7.25,1142.89
 Mitchell,Bass,pending,1729123200,2024-12-26,478 Amanda Motorway,Suite 962,Yatesville,MY,Arkansas,7424,+15685953477,alicebrooks@gmail.com,USD,24.73,7.25,394.22
-Bradley,Bell,overdue,1697760000,2024-11-05,5049 Ruiz Forest,Suite 242,Debrabury,AM,North Dakota,50904,+16158501879,lfranklin@yahoo.com,USD,18,7.25,3764.58
+Bradley,Bell,overdue,1697760000,2024-11-05,5049 Ruiz Forest,Suite 242,Debrabury,AM,North Dakota,50904,+16158501879,lfranklin@yahoo.com,USD,18.0,7.25,3764.58
 Christina,Murphy,overdue,1680048000,2024-11-01,52282 Reid Track Suite 296,Suite 383,North Linda,BA,New Mexico,95774,+16475245403,nturner@hotmail.com,USD,25.72,7.25,3922.85
 Samantha,Woodward,pending,1687219200,2024-12-30,1141 Mitchell Ferry,Suite 558,Lake Steven,LK,Virginia,86837,+19238573855,amandaguerrero@yahoo.com,USD,6.08,7.25,3697.2
 Amber,Walters,pending,1720051200,2024-12-23,360 Jones Port Suite 676,Suite 042,West Mary,TM,Georgia,61189,+13828669495,hamiltongloria@bailey.net,USD,7.57,7.25,2825.56
@@ -831,7 +831,7 @@ Jessica,Hernandez,overdue,1702166400,2024-11-16,3846 Christine Trafficway Suite 
 Roger,Jones,pending,1699660800,2024-12-27,77950 Benjamin Forge,Suite 621,East Anthony,TN,Texas,94103,+15159730692,jamesarnold@melendez.org,USD,25.85,7.25,1515.72
 Gina,Sexton,overdue,1680652800,2024-11-11,665 Brown Cliffs,Suite 229,Griffinborough,JP,Rhode Island,961,+18339117745,cynthia35@burke-johnson.com,USD,24.28,7.25,3675.55
 Tammy,Bell,pending,1711411200,2024-12-07,845 Escobar Rapid,Suite 874,Lake Brianstad,GH,Montana,86662,+14067537397,michelle70@lamb.com,USD,24.66,7.25,498.65
-Thomas,Scott,overdue,1715644800,2024-11-03,9310 Christopher Ramp Suite 299,Apt. 295,Staceyborough,CO,Virginia,11296,+17612390423,pdoyle@campos.com,USD,5.8,7.25,1745
+Thomas,Scott,overdue,1715644800,2024-11-03,9310 Christopher Ramp Suite 299,Apt. 295,Staceyborough,CO,Virginia,11296,+17612390423,pdoyle@campos.com,USD,5.8,7.25,1745.0
 Sarah,Graham,pending,1687046400,2024-12-27,5317 Anthony Hollow Apt. 349,Apt. 382,Brookschester,UG,California,32649,+17591818512,mark74@hotmail.com,USD,26.89,7.25,1506.5
 Kathleen,Gilmore,overdue,1689897600,2024-12-04,7827 Daniel Square Apt. 003,Apt. 666,South Scottchester,WS,Connecticut,15175,+19890786022,nramirez@henderson-ponce.info,USD,28.03,7.25,4893.73
 Angela,Calhoun,overdue,1703980800,2024-11-23,17292 Vickie Forks,Apt. 733,Everettville,CD,Connecticut,41771,+14934810082,jennifer49@villegas.com,USD,17.54,7.25,627.35
@@ -852,7 +852,7 @@ David,Hughes,overdue,1704931200,2024-11-27,8232 Rodriguez Locks,Suite 053,New Ke
 Jennifer,Bauer,pending,1727049600,2024-12-17,1641 Jacob Mill Suite 764,Apt. 586,West Scott,LI,Massachusetts,4384,+19368637111,gespinoza@hotmail.com,USD,22.22,7.25,4080.87
 Alejandro,Baldwin,overdue,1682640000,2024-11-19,1947 Ethan Plaza Apt. 331,Apt. 878,North Tonya,HU,Rhode Island,10677,+19343714313,lisa25@gmail.com,USD,29.95,7.25,645.73
 Karen,Johnston,pending,1710460800,2024-12-17,050 Ramirez Square Apt. 645,Apt. 241,Nicholsonland,SY,Wyoming,47523,+15919023712,restrada@yahoo.com,USD,29.06,7.25,2454.82
-Stephanie,Scott,overdue,1686528000,2024-11-14,834 Olivia Crossroad Apt. 604,Apt. 871,Randallberg,NZ,South Carolina,19574,+12996337361,dherring@weber.com,USD,5.17,7.25,2175
+Stephanie,Scott,overdue,1686528000,2024-11-14,834 Olivia Crossroad Apt. 604,Apt. 871,Randallberg,NZ,South Carolina,19574,+12996337361,dherring@weber.com,USD,5.17,7.25,2175.0
 Tiffany,Vasquez,overdue,1696809600,2024-11-12,42142 Morgan Loop,Suite 706,Thomasview,BB,Minnesota,51468,+19964220836,atkinschristopher@gmail.com,USD,15.7,7.25,951.08
 Luis,Elliott,overdue,1707264000,2024-11-28,6833 Janet Station,Suite 707,Smithville,UA,Missouri,86751,+13044070421,hhart@montgomery.org,USD,24.05,7.25,1300.44
 Brittany,James,overdue,1726012800,2024-11-21,0021 Jackson Flats Suite 005,Suite 110,Robinmouth,PE,Montana,61446,+14136499759,lawrencemartinez@gmail.com,USD,7.82,7.25,1601.42
@@ -976,7 +976,7 @@ Christopher,Pittman,pending,1715299200,2024-12-30,87022 Patterson Stravenue,Suit
 Kristin,Hansen,pending,1676937600,2024-12-24,6923 Hendricks Corners,Apt. 023,West Joannahaven,GT,South Carolina,46589,+12428758346,agray@yahoo.com,USD,14.43,7.25,4024.01
 John,Williams,pending,1702166400,2024-12-19,3214 Montgomery Spur Suite 861,Apt. 256,North Kaylaton,NL,Delaware,39014,+14630080702,garrettsharon@yahoo.com,USD,21.18,7.25,3674.27
 Danielle,Bennett,overdue,1709337600,2024-11-01,727 Robert Courts,Suite 026,Melanieland,TJ,Georgia,41395,+19724751107,rachelolson@riley-johnson.com,USD,26.21,7.25,1173.94
-Suzanne,Lopez,overdue,1691020800,2024-11-17,36507 Stevens Court,Apt. 096,East Aliciamouth,BB,Rhode Island,86256,+17497806827,david93@gmail.com,USD,17.37,7.25,2237
+Suzanne,Lopez,overdue,1691020800,2024-11-17,36507 Stevens Court,Apt. 096,East Aliciamouth,BB,Rhode Island,86256,+17497806827,david93@gmail.com,USD,17.37,7.25,2237.0
 Jimmy,Waters,overdue,1722556800,2024-11-19,31550 Shaffer Run,Apt. 713,Caitlinborough,NO,Alabama,37288,+16159499259,markmoore@yahoo.com,USD,12.13,7.25,524.77
 Jennifer,Mccormick,overdue,1722211200,2024-11-05,126 Deborah Club,Apt. 938,Christianton,ID,North Dakota,4635,+13636167640,bgomez@hotmail.com,USD,12.7,7.25,3187.51
 Jay,Schaefer,pending,1701475200,2024-12-28,52118 Ramirez Expressway,Apt. 397,South Matthew,TJ,Missouri,4618,+15410524135,vphillips@boyd.com,USD,26.37,7.25,1123.04
