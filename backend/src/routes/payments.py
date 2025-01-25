@@ -4,7 +4,7 @@ from datetime import datetime, timezone, date
 import time
 from bson import ObjectId
 from src.config import COLLECTION_NAME, DB_HOST, DB_PORT, DB_NAME
-from src.models import PaymentQuery, PaymentCreate
+from src.models import PaymentCreate, PaymentQuery
 from src.helpers import calculate_total_due
 
 payment_router = APIRouter()
@@ -87,41 +87,14 @@ def get_payments(params: PaymentQuery = Depends()):
 
 
 @payment_router.post("/add_payment")
-def add_payment(payment: PaymentCreate):
+def create_payment(payment: PaymentCreate):
     # Convert the Pydantic model to a dictionary
     payment_data = payment.dict()
-    current_time = datetime.now(timezone.utc)
-    payment_row = {
-        "payee_first_name": payment_data["payee_first_name"],
-        "payee_last_name": payment_data["payee_last_name"],
-        "payee_payment_status": payment_data["payee_payment_status"],
-        "payee_added_date_utc": int(time.time()),
-        "payee_due_date": datetime.now().strftime("%Y-%m-%d"),
-        "payee_address": {
-            "line_1": payment_data["payee_address_line_1"],
-            "line_2": payment_data["payee_address_line_2"],
-            "city": payment_data["payee_city"],
-            "province_or_state": payment_data["payee_province_or_state"],
-            "country": payment_data["payee_country"],
-            "postal_code": payment_data["payee_postal_code"],
-        },
-        "payee_contact": {
-            "phone_number": payment_data["payee_phone_number"],
-            "email": payment_data["payee_email"],
-        },
-        "currency": payment_data["currency"],
-        "discount_percent": payment_data["discount_percent"],
-        "tax_percent": payment_data["tax_percent"],
-        "due_amount": payment_data["due_amount"],
-        "created_at": current_time,
-        "updated_at": current_time,
-    }
-
-    print("payment_row :>", payment_row)
+    print("payment_data :>", payment_data)
 
     # Insert into MongoDB
     try:
-        result = payment_collection.insert_one(payment_row)
+        result = payment_collection.insert_one(payment_data)
     except Exception as e:
         raise HTTPException(
             status_code=500, detail=f"Failed to insert payment: {str(e)}"
@@ -132,3 +105,29 @@ def add_payment(payment: PaymentCreate):
         "message": "Payment entry added successfully",
         "id": str(result.inserted_id),
     }
+
+
+@payment_router.delete("/delete_payment/{payment_id}")
+def delete_payment(payment_id: str):
+    try:
+        payment_id = ObjectId(payment_id)
+    except InvalidId:
+        raise HTTPException(status_code=400, detail="Invalid payment ID")
+    result = payment_collection.delete_one({"_id": payment_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Payment not found")
+    return {"message": "Payment deleted successfully"}
+
+
+# @payment_router.put("/update_payment/{payment_id}")
+# async def update_payment(payment_id: str, payment: PaymentUpdate):
+#     try:
+#         payment_id = ObjectId(payment_id)
+#     except InvalidId:
+#         raise HTTPException(status_code=400, detail="Invalid payment ID")
+#     update_data = payment.dict(exclude_unset=True)
+#     update_data["updated_at"] = datetime.utcnow()
+#     result = payment_collection.update_one({"_id": payment_id}, {"$set": update_data})
+#     if result.matched_count == 0:
+#         raise HTTPException(status_code=404, detail="Payment not found")
+#     return {"message": "Payment updated successfully"}

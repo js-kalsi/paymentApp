@@ -232,4 +232,62 @@ curl -X POST http://127.0.0.1:8000/add_payment \
         "payee_email": "flockbithamp@gmail.com",
         "currency": Optional[str] = "CAD"
          }'
+         
+curl -X 'POST' \
+  'http://127.0.0.1:8000/add_payment' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "payee_first_name": "John",
+    "payee_last_name": "Doe",
+    "payee_address_line_1": "1234 Elm St",
+    "payee_address_line_2": "Apt 101",
+    "payee_city": "New York",
+    "payee_country": "US",
+    "payee_province_or_state": "NY",
+    "payee_postal_code": "10001",
+    "payee_phone_number": "+1234567890",
+    "payee_email": "johndoe@example.com",
+    "currency": "USD",
+    "discount_percent": 5.0,
+    "tax_percent": 8.25,
+    "due_amount": 1000.50
+  }'
+
+curl -X 'DELETE' \
+  'http://localhost:8000/delete_payment/6794443f91e44c37249d0f2b' \
+  -H 'accept: application/json'
+
+db.payment_info.findOne({ "_id": ObjectId("6794443f91e44c37249d0f2b") });
+
+
+
+
+curl -X 'POST' \
+  'http://127.0.0.1:8000/add_payment' \
+  -H 'Content-Type: application/json' \
+  -d '{
+                "payee_first_name": "John",
+                "payee_last_name": "Doe",
+                "payee_payment_status": "pending",
+                "payee_due_date": "2025-01-31",
+                "payee_address": {
+                    "line_1": "123 Main St",
+                    "line_2": "Apt 4B",
+                    "city": "Toronto",
+                    "province_or_state": "Ontario",
+                    "country": "CA",
+                    "postal_code": "M1A 2B3"
+                },
+                "payee_contact": {
+                    "phone_number": "+14165555555",
+                    "email": "johndoe@example.com"
+                },
+                "currency": "CAD",
+                "due_amount": 150.75,
+                "discount_percent": 5.0,
+                "tax_percent": 13.0,
+                "created_at": "2025-01-24T10:00:00",
+                "updated_at": "2025-01-24T12:00:00"
+            }'
+
 ```

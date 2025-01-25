@@ -1,7 +1,10 @@
 from pydantic import BaseModel, Field, EmailStr, validator
-from typing import Optional
+from typing import Optional, Annotated
 from fastapi import Query
-from .helpers import validate_country, validate_currency
+from pydantic.types import constr
+from datetime import datetime
+
+from src.helpers import validate_country, validate_currency
 
 
 def check_valid_country(value: str) -> str:
@@ -43,33 +46,6 @@ class PaymentQuery(BaseModel):
     # Page and limit values
     page: int = Query(1, ge=1)  # Default is 1, and must be >= 1
     limit: int = Query(10, ge=1)  # Default is 10, and must be >= 1
-
-    # Validators
-    _validate_country = validator("payee_country", allow_reuse=True)(
-        check_valid_country
-    )
-    _validate_currency = validator("currency", allow_reuse=True)(check_valid_currency)
-    _validate_payment_status = validator("payee_payment_status", allow_reuse=True)(
-        check_valid_payment_status
-    )
-
-
-class PaymentCreate(BaseModel):
-    payee_first_name: str
-    payee_last_name: str
-    payee_payment_status: Optional[str] = "pending"
-    payee_address_line_1: str
-    payee_address_line_2: Optional[str] = None
-    payee_city: str
-    payee_country: str
-    payee_province_or_state: Optional[str] = None
-    payee_postal_code: str
-    payee_phone_number: str = Field(..., pattern=r"^\+?[1-9]\d{1,14}$")
-    payee_email: EmailStr
-    currency: str = Field(..., pattern="^[A-Z]{3}$")  # ISO 4217
-    discount_percent: Optional[float] = 0.0
-    tax_percent: Optional[float] = 0.0
-    due_amount: Optional[float] = 0.0
 
     # Validators
     _validate_country = validator("payee_country", allow_reuse=True)(
