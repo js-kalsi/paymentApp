@@ -1,0 +1,316 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="rounded-3 border border-primary p-1 p-sm-0 p-md-5 mt-5">
+        <div class="row mb-3">
+          <div class="col-md-4 mb-md-0 mb-3">
+            <div class="input-group">
+              <button class="btn btn-primary" type="button">First Name</button>
+              <input
+                [(ngModel)]="mainMode.firstName"
+                class="form-control"
+                type="text"
+                placeholder="Eg: John"
+              />
+            </div>
+          </div>
+          <div class="col-md-4 mb-md-0 mb-3">
+            <div class="input-group">
+              <span class="btn btn-primary">Last Name</span>
+              <input
+                [(ngModel)]="mainMode.lastName"
+                class="form-control"
+                type="text"
+                placeholder="Eg: Doe"
+              />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="input-group">
+              <span class="btn btn-primary">Payment Status</span>
+              <select class="form-select" [(ngModel)]="mainMode.paymentStatus">
+                <option value="">Select Payment Status</option>
+                <option
+                  *ngFor="let status of paymentStatusOptions"
+                  [value]="status.key"
+                >
+                  {{ status.value }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-4 mb-md-0 mb-3">
+            <div class="input-group">
+              <button class="btn btn-primary" type="button">Due Date</button>
+              <input
+                [(ngModel)]="mainMode.dueDate"
+                class="form-control"
+                type="date"
+                placeholder="Owner"
+              />
+            </div>
+          </div>
+          <div class="col-md-4 mb-md-0 mb-3">
+            <div class="input-group">
+              <button class="btn btn-primary" type="button">
+                Address Line 1
+              </button>
+              <input
+                [(ngModel)]="mainMode.addressLine1"
+                class="form-control"
+                type="text"
+                placeholder="Enter Address Line 1"
+              />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="input-group">
+              <button class="btn btn-primary" type="button">
+                Address Line 2
+              </button>
+              <input
+                [(ngModel)]="mainMode.addressLine2"
+                class="form-control"
+                type="text"
+                placeholder="Enter Address Line 2"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-4 mb-md-0 mb-3">
+            <div class="input-group">
+              <span class="btn btn-primary">City</span>
+              <input
+                [(ngModel)]="mainMode.city"
+                class="form-control"
+                type="text"
+                placeholder="Enter City Name"
+              />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="input-group">
+              <span class="btn btn-primary">Country</span>
+              <input
+                [(ngModel)]="mainMode.country"
+                class="form-control"
+                type="text"
+                placeholder="Enter Country Name"
+              />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="input-group">
+              <span class="btn btn-primary">Province/State</span>
+              <input
+                [(ngModel)]="mainMode.provinceOrState"
+                class="form-control"
+                type="text"
+                placeholder="Enter Province/State"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-4 mb-md-0 mb-3">
+            <div class="input-group">
+              <span class="btn btn-primary">Postal Code</span>
+              <input
+                [(ngModel)]="mainMode.postalCode"
+                class="form-control"
+                type="text"
+                placeholder="Enter Postal Code"
+              />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="input-group">
+              <span class="btn btn-primary">Phone Number</span>
+              <input
+                [(ngModel)]="mainMode.phoneNumber"
+                class="form-control"
+                type="tel"
+                placeholder="Enter Phone Number"
+              />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="input-group">
+              <span class="btn btn-primary">Email</span>
+              <input
+                [(ngModel)]="mainMode.email"
+                class="form-control"
+                type="email"
+                placeholder="Enter Email"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-3 mb-md-0 mb-3">
+            <div class="input-group">
+              <span class="btn btn-primary">Currency</span>
+              <input
+                [(ngModel)]="mainMode.currency"
+                class="form-control"
+                type="text"
+                placeholder="Enter Currency"
+              />
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="input-group">
+              <span class="btn btn-primary">Discount %</span>
+              <input
+                [(ngModel)]="mainMode.discountPercent"
+                class="form-control"
+                type="number"
+                min="0"
+                max="100"
+                step="0.1"
+                placeholder="Enter Discount in %"
+              />
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="input-group">
+              <span class="btn btn-primary">Tax %</span>
+              <input
+                [(ngModel)]="mainMode.taxPercent"
+                class="form-control"
+                type="number"
+                min="0"
+                max="100"
+                step="0.1"
+                placeholder="Enter Tax in %"
+              />
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="input-group">
+              <span class="btn btn-primary">Due Amount</span>
+              <input
+                [(ngModel)]="mainMode.dueAmount"
+                class="form-control"
+                type="number"
+                placeholder="Enter Due Amt"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-5 mb-5">
+        <button class="btn btn-primary" (click)="onSearch()">Search</button>
+        <button class="btn btn-primary ms-5" (click)="resetSearch()">
+          Reset
+        </button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="enableLoader" class="d-flex justify-content-center mt-3">
+    <div
+      class="spinner-grow text-primary"
+      style="width: 1rem; height: 1rem"
+      role="status"
+    >
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <div
+      class="spinner-grow text-primary"
+      style="width: 1rem; height: 1rem"
+      role="status"
+    >
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <div
+      class="spinner-grow text-primary"
+      style="width: 1rem; height: 1rem"
+      role="status"
+    >
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <div
+      class="spinner-grow text-primary"
+      style="width: 1rem; height: 1rem"
+      role="status"
+    >
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <div
+      class="spinner-grow text-primary"
+      style="width: 1rem; height: 1rem"
+      role="status"
+    >
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div *ngIf="!editMode">
+    <div class="table-responsive justify-content-center">
+      <table class="table table-hover table-sm">
+        <thead>
+          <tr>
+            <th class="text-white bg-primary text-center">#</th>
+            <th class="text-white bg-primary text-center">Name</th>
+            <th class="text-white bg-primary text-center">Due Date</th>
+            <th class="text-white bg-primary text-center">Due Amount</th>
+            <th class="text-white bg-primary text-center">Payment Status</th>
+            <th class="text-white bg-primary text-center">Address</th>
+            <th class="text-white bg-primary text-center">Phone Number</th>
+            <th class="text-white bg-primary text-center">Email Id</th>
+            <th class="text-white bg-primary text-center">Currency</th>
+            <th class="text-white bg-primary text-center">Discount(%)</th>
+            <th class="text-white bg-primary text-center">Tax(%)</th>
+            <th class="text-white bg-primary text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let record of records; let i = index">
+            <td class="text-nowrap text-primary text-center">{{ i + 1 }}</td>
+            <td class="text-nowrap text-center">
+              {{ record.name }}
+            </td>
+            <td class="text-nowrap text-center">
+              {{ record.paymentStatus }}
+            </td>
+            <td class="text-nowrap text-center">{{ record.dueDate }}</td>
+            <td class="text-nowrap text-center">{{ record.dueAmount }}</td>
+            <td class="text-nowrap text-center">{{ record.address }}</td>
+            <td class="text-nowrap text-center">{{ record.phoneNumber }}</td>
+            <td class="text-nowrap text-center">{{ record.email }}</td>
+            <td class="text-nowrap text-center">{{ record.currency }}</td>
+            <td class="text-nowrap text-center">
+              {{ record.discountPercent }}
+            </td>
+            <td class="text-nowrap text-center">{{ record.taxPercent }}</td>
+            <td>
+              <div class="d-flex gap-2">
+                <button
+                  class="btn btn-outline-danger"
+                  (click)="deleteRecord(record.id)"
+                >
+                  D
+                </button>
+                <button
+                  class="btn btn-outline-primary"
+                  (click)="editRecord(record)"
+                >
+                  E
+                </button>
+                <button
+                  class="btn btn-outline-warning"
+                  (click)="readRecord(record)"
+                >
+                  R
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

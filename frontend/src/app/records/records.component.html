@@ -1,0 +1,15 @@
+<div class="container">
+  <h1 class="text-lg-center text-primary mt-lg-5 mb-4">Records</h1>
+  <hr />
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-12 col-xs-10">
+        <app-records-table
+          componentType="records"
+          [records]="records"
+          [recordsPerPage]="recordsPerPage"
+        ></app-records-table>
+      </div>
+    </div>
+  </div>
+</div>

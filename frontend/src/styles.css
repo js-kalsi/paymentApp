@@ -1,0 +1,43 @@
+/* You can add global styles to this file, and also import other style files */
+.hidden {
+  display: None;
+}
+
+.mt-8-rem {
+  margin-top: 8rem;
+}
+
+.mb-2-5-rem {
+  margin-bottom: 2.5rem;
+}
+
+.form-select-custom span{
+  font-size: 1rem;
+}
+
+.form-select-custom{
+  display: block;
+  width: 100%;
+  padding: .375rem 2.25rem .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: var(--bs-body-bg);
+  background-image: var(--bs-form-select-bg-img), var(--bs-form-select-bg-icon, none);
+  background-repeat: no-repeat;
+  background-position: right .75rem center;
+  background-size: 16px 12px;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+}
+
+.input-group > .form-select-custom {
+position: relative;
+flex: 1 1 auto;
+width: 1%;
+min-width: 0;
+}

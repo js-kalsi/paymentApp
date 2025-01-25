@@ -1,0 +1,275 @@
+<div *ngIf="!editMode">
+  <div class="table-responsive justify-content-center">
+    <table class="table table-hover table-sm">
+      <thead>
+        <tr>
+          <th class="text-white bg-primary text-center">#</th>
+          <th class="text-white bg-primary text-center">Name</th>
+          <th class="text-white bg-primary text-center">Payment Status</th>
+          <th class="text-white bg-primary text-center">Due Date</th>
+          <th class="text-white bg-primary text-center">Due Amount</th>
+          <th class="text-white bg-primary text-center">Status</th>
+          <th class="text-white bg-primary text-center">Address</th>
+          <th class="text-white bg-primary text-center">Phone Number</th>
+          <th class="text-white bg-primary text-center">Email Id</th>
+          <th class="text-white bg-primary text-center">Currency</th>
+          <th class="text-white bg-primary text-center">Discount(%)</th>
+          <th class="text-white bg-primary text-center">Tax(%)</th>
+          <th class="text-white bg-primary text-center">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let record of paginatedItems; let i = index">
+          <td class="text-nowrap text-primary text-center">{{ i + 1 }}</td>
+          <td class="text-nowrap text-center">
+            {{ _utils.unixTimestampToLocal(record.id) }}
+          </td>
+          <td class="text-nowrap text-center">
+            {{ _utils.unixTimestampToLocal(record.kill_date) }}
+          </td>
+          <td class="text-nowrap text-center">{{ record.lot }}</td>
+          <td class="text-nowrap text-center">{{ record.type }}</td>
+          <td class="text-nowrap text-center">{{ record.breed }}</td>
+          <td class="text-nowrap text-center">{{ record.sex }}</td>
+          <td class="text-nowrap text-center">{{ record.condemnation }}</td>
+          <td class="text-nowrap text-center">{{ record.rfid }}</td>
+          <td class="text-nowrap text-center">{{ record.owner }}</td>
+          <td class="text-nowrap text-center">{{ record.eartag }}</td>
+          <td class="text-nowrap text-center">{{ record.weight }}</td>
+          <td class="text-nowrap text-center">{{ record.otm }}</td>
+          <td class="text-nowrap text-center">{{ record.bill_to }}</td>
+          <td>
+            <div class="d-flex gap-2">
+              <button
+                class="btn btn-outline-danger"
+                (click)="deleteData(record.id)"
+              >
+                D
+              </button>
+              <button
+                class="btn btn-outline-primary"
+                (click)="editRecord(record)"
+              >
+                E
+              </button>
+              <button
+                class="btn btn-outline-warning"
+                (click)="readRecord(record)"
+              >
+                R
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div *ngIf="editMode">
+  <div class="container mt-5">
+    <button class="btn btn-primary mb-5">
+      <i class="bi bi-arrow-left" (click)="reset()" style="font-size: 1.2em">
+        Back</i
+      >
+    </button>
+    <div class="row justify-content-center">
+      <div class="col-md-4 col-xs-10">
+        <table
+          class="table table-bordered table-hover table-striped table-responsive table-sm"
+        >
+          <thead>
+            <tr>
+              <th class="text-primary">Fields</th>
+              <th class="text-primary">Values</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- <tr>
+              <td>RFID</td>
+              <td>
+                <input
+                  [(ngModel)]="editModeRecord.rfid"
+                  class="form-control"
+                  type="number"
+                  readonly
+                />
+              </td>
+            </tr> -->
+            <tr>
+              <td>Killdate</td>
+              <td>
+                <input
+                  [(ngModel)]="editModeRecord.kill_date"
+                  class="form-control"
+                  type="date"
+                />
+              </td>
+            </tr>
+            <!-- <tr>
+              <td>Owner</td>
+              <td>
+                <input
+                  [(ngModel)]="editModeRecord.owner"
+                  class="form-control"
+                  type="text"
+                />
+              </td>
+            </tr> -->
+            <tr>
+              <td>Owner</td>
+              <td>
+                <input
+                  #owner
+                  [(ngModel)]="editModeRecord.owner"
+                  class="form-control"
+                  type="text"
+                  placeholder="Search owner..."
+                  (keyup)="filterOwners()"
+                  (focus)="showDropdown = true"
+                  (blur)="hideDropdownWithDelay()"
+                  autocomplete="off"
+                />
+                <ul
+                  *ngIf="showDropdown"
+                  class="dropdown-menu show"
+                  [ngClass]="{ 'd-none': filteredOwners.length === 0 }"
+                >
+                  <li
+                    *ngFor="let owner of filteredOwners"
+                    class="dropdown-item"
+                    (click)="selectOwner(owner)"
+                  >
+                    {{ owner }}
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td>EarTag</td>
+              <td>
+                <input
+                  [(ngModel)]="editModeRecord.eartag"
+                  class="form-control"
+                  type="text"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>Animal</td>
+              <td>
+                <!-- <input
+                  [(ngModel)]="editModeRecord.type"
+                  class="form-control"
+                  type="text"
+                /> -->
+                <select
+                  id="dropdown"
+                  class="form-select"
+                  [(ngModel)]="editModeRecord.type"
+                  name="dropdown"
+                >
+                  <option *ngFor="let animal of animalButtons" [value]="animal">
+                    {{ animal }}
+                  </option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>Wt / Heads</td>
+              <td>
+                <input
+                  [(ngModel)]="editModeRecord.weight"
+                  class="form-control"
+                  type="number"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>Breed</td>
+              <td>
+                <angular2-multiselect
+                  [data]="breedDropdownList"
+                  [(ngModel)]="breedSelectedItems"
+                  [settings]="breedDropdownSettings"
+                ></angular2-multiselect>
+              </td>
+            </tr>
+            <tr>
+              <td>BillTo</td>
+              <td>
+                <input
+                  [(ngModel)]="editModeRecord.bill_to"
+                  class="form-control"
+                  type="text"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>Condemnation</td>
+              <td>
+                <angular2-multiselect
+                  [data]="condemnationDropdownList"
+                  [(ngModel)]="condemnationSelectedItems"
+                  [settings]="condemnationDropdownSettings"
+                ></angular2-multiselect>
+              </td>
+            </tr>
+            <tr>
+              <td>OTM</td>
+              <td>
+                <select
+                  id="dropdown"
+                  class="form-select"
+                  [(ngModel)]="editModeRecord.otm"
+                  name="dropdown"
+                >
+                  <option *ngFor="let option of otmOptions" [value]="option.id">
+                    {{ option.name }}
+                  </option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>Sex</td>
+              <td>
+                <select
+                  class="form-select"
+                  [(ngModel)]="editModeRecord.sex"
+                  name="dropdown"
+                >
+                  <option
+                    *ngFor="let sexButton of sexButtons"
+                    [value]="sexButton"
+                  >
+                    {{ sexButton }}
+                  </option>
+                </select>
+              </td>
+            </tr>
+
+            <tr>
+              <td colspan="2">
+                <div class="d-grid gap-2 col-6 mx-auto">
+                  <button
+                    class="btn btn-primary"
+                    (click)="updateData(editModeRecord)"
+                  >
+                    Update Record
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<app-pagination
+  *ngIf="!editMode"
+  [totalItems]="records.length"
+  [itemsPerPage]="recordsPerPage"
+  [(currentPage)]="currentPage"
+>
+</app-pagination>
+<app-print-pdf></app-print-pdf>

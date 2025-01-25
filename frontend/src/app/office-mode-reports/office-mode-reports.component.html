@@ -1,0 +1,253 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 p-2 p-sm-0 p-md-5">
+      <div *ngIf="dayReports.mode">
+        <h1 class="text-lg-center text-primary mt-lg-5 mb-4">Day Reports</h1>
+        <hr />
+        <div
+          class="bg-body-tertiary rounded-3 border-info border border-primary p-3"
+        >
+          <div class="row">
+            <div class="col-md-4 col-xs-12">
+              <div class="input-group mb-3">
+                <span class="btn btn-primary">Date</span>
+                <input
+                  [(ngModel)]="dayReports.date"
+                  (ngModelChange)="generateDayReport()"
+                  class="form-control"
+                  type="date"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="row justify-content-center mt-5 p-4"
+            *ngIf="!dayReports.srmWtExistInDB && !enableLoader"
+          >
+            <h3 class="text-center text-primary">Enter EOD SRM Weight</h3>
+            <input
+              [(ngModel)]="dayReports.srmWeight"
+              class="form-control"
+              type="number"
+              placeholder="EOD SRM Weight"
+            />
+            <div class="d-flex justify-content-center gap-2">
+              <button class="btn btn-primary mt-3" (click)="saveSrmEodWeight()">
+                Add SRM Weight
+              </button>
+            </div>
+          </div>
+          <div class="d-flex justify-content-center mt-3">
+            <div *ngIf="enableLoader">
+              <div
+                class="spinner-grow text-primary"
+                style="width: 1rem; height: 1rem"
+                role="status"
+              >
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              <div
+                class="spinner-grow text-primary"
+                style="width: 1rem; height: 1rem"
+                role="status"
+              >
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              <div
+                class="spinner-grow text-primary"
+                style="width: 1rem; height: 1rem"
+                role="status"
+              >
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              <div
+                class="spinner-grow text-primary"
+                style="width: 1rem; height: 1rem"
+                role="status"
+              >
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              <div
+                class="spinner-grow text-primary"
+                style="width: 1rem; height: 1rem"
+                role="status"
+              >
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+            <div *ngIf="dayReports.srmWtExistInDB && dayReports.records.length">
+              <a
+                (click)="downloadPDF()"
+                class="text-primary"
+                style="margin-right: 2rem; font-size: 3.5rem"
+                ><i class="bi bi-filetype-pdf"></i
+              ></a>
+              <a
+                href="{{ dayReports.url }}"
+                target="_blank"
+                class="text-primary"
+                style="margin-right: 2rem; font-size: 3.5rem"
+                ><i class="bi bi-filetype-csv"></i
+              ></a>
+            </div>
+          </div>
+          <h4
+            *ngIf="dayReports.srmWtExistInDB"
+            class="text-center text-primary mt-5"
+          >
+            SRM Weight for <strong>{{ dayReports.date }}</strong> is
+            <strong>{{ dayReports.srmWeight }}</strong>
+          </h4>
+          <h3
+            *ngIf="dayReports.srmWtExistInDB && dayReports.records.length === 0"
+            class="text-center mt-5"
+          >
+            <strong>No Entries Found!</strong>
+          </h3>
+        </div>
+        <div class="table-responsive justify-content-center mt-4">
+          <table
+            class="table table-hover"
+            *ngIf="dayReports.srmWtExistInDB && dayReports.records.length"
+          >
+            <thead>
+              <tr>
+                <th class="text-white bg-primary text-center">#</th>
+                <th class="text-white bg-primary text-center">DATE</th>
+                <th class="text-white bg-primary text-center">LOT#</th>
+                <th class="text-white bg-primary text-center">ANIMAL</th>
+                <th class="text-white bg-primary text-center">BREED</th>
+                <th class="text-white bg-primary text-center">SEX</th>
+                <th class="text-white bg-primary text-center">CONDEMNATION</th>
+                <th class="text-white bg-primary text-center">RFID SERIAL</th>
+                <th class="text-white bg-primary text-center">OWNER</th>
+                <th class="text-white bg-primary text-center">NOTES</th>
+                <th class="text-white bg-primary text-center">WT/HEAD</th>
+                <th class="text-white bg-primary text-center">OTM</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let record of paginatedItems; let i = index">
+                <td class="text-nowrap text-center text-primary">
+                  {{ i + 1 }}
+                </td>
+                <td class="text-nowrap text-center">
+                  {{ _utils.unixTimestampToLocal(record.id) }}
+                </td>
+                <td class="text-nowrap text-center">{{ record.lot }}</td>
+                <td class="text-nowrap text-center">{{ record.type }}</td>
+                <td class="text-nowrap text-center">{{ record.breed }}</td>
+                <td class="text-nowrap text-center">{{ record.sex }}</td>
+                <td class="text-nowrap text-center">
+                  {{ record.condemnation }}
+                </td>
+                <td class="text-nowrap text-center">{{ record.rfid }}</td>
+                <td class="text-nowrap text-center">{{ record.owner }}</td>
+                <td class="text-nowrap text-center">{{ record.eartag }}</td>
+                <td class="text-nowrap text-center">{{ record.weight }}</td>
+                <td class="text-nowrap text-center">{{ record.otm }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div *ngIf="retiredTagReports.mode">
+        <h1 class="text-lg-center text-primary mt-lg-5 mb-4">
+          Retired Tag Report
+        </h1>
+        <hr />
+        <div
+          class="bg-body-tertiary rounded-3 border-info border border-primary p-3"
+        >
+          <div class="row">
+            <div class="col-md-6 col-xs-12">
+              <div class="input-group mb-3">
+                <span class="btn btn-primary">From Date</span>
+                <input
+                  [(ngModel)]="retiredTagReports.fromDate"
+                  (ngModelChange)="generateTagReport()"
+                  class="form-control"
+                  type="date"
+                />
+              </div>
+            </div>
+            <div class="col-md-6 col-xs-12">
+              <div class="input-group mb-3">
+                <span class="btn btn-primary">To Date</span>
+                <input
+                  [(ngModel)]="retiredTagReports.toDate"
+                  (ngModelChange)="generateTagReport()"
+                  class="form-control"
+                  type="date"
+                />
+              </div>
+            </div>
+            <div class="d-flex justify-content-center mt-3">
+              <div *ngIf="enableLoader">
+                <div
+                  class="spinner-grow text-primary"
+                  style="width: 1rem; height: 1rem"
+                  role="status"
+                >
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+                <div
+                  class="spinner-grow text-primary"
+                  style="width: 1rem; height: 1rem"
+                  role="status"
+                >
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+                <div
+                  class="spinner-grow text-primary"
+                  style="width: 1rem; height: 1rem"
+                  role="status"
+                >
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+                <div
+                  class="spinner-grow text-primary"
+                  style="width: 1rem; height: 1rem"
+                  role="status"
+                >
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+                <div
+                  class="spinner-grow text-primary"
+                  style="width: 1rem; height: 1rem"
+                  role="status"
+                >
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
+              <div *ngIf="!enableLoader && retiredTagReports.url.length">
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                  (click)="openPdfInNewTab(retiredTagReports.url)"
+                >
+                  <i
+                    class="bi bi-file-earmark-spreadsheet"
+                    style="font-size: 20px"
+                  ></i>
+                  CLTS_RETIRED</button
+                >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                  (click)="openPdfInNewTab(retiredTagReports.url_bovine)"
+                >
+                  <i
+                    class="bi bi-file-earmark-spreadsheet"
+                    style="font-size: 20px"
+                  ></i>
+                  CLTS_RETIRED (BOVINE)
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+#searchPDFTable hr {
+    height: 1px;
+    background-color: black;
+    margin: 0;
+}
+#searchPDFTable table {
+    font-size: 18px;
+}
+

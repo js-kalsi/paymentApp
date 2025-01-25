@@ -1,0 +1,8 @@
+#pdfTable hr {
+    height: 1px;
+    background-color: black;
+    margin: 0;
+}
+#pdfTable table {
+    font-size: 12px;
+}

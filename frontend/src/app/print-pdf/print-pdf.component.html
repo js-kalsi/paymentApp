@@ -1,0 +1,92 @@
+<div class="container-fluid" #tableContainer>
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div id="pdf-content" *ngFor="let tableRecord of tableRecords">
+        <table class="table table-sm table-bordered mt-4" #tableElements>
+          <tr>
+            <td
+              class="text-center font-size"
+              style="width: 30%; font-weight: bold"
+            >
+              {{ tableRecord.owner }}
+            </td>
+            <td class="text-center" style="width: 50%; background-color: white">
+              <ngx-barcode6
+                [bc-format]="'CODE128'"
+                [bc-value]="tableRecord.lot"
+                [bc-width]="6"
+                [bc-height]="140"
+                [bc-font-size]="20"
+                [bc-display-value]="true"
+              >
+              </ngx-barcode6>
+            </td>
+          </tr>
+          <tr>
+            <td>Destination</td>
+            <td class="font-size" style="font-weight: bold">
+              {{ tableRecord.billTo }}
+            </td>
+          </tr>
+          <tr>
+            <td>Lot#</td>
+            <td class="font-size" style="font-weight: bold">
+              {{ tableRecord.lot }}
+            </td>
+          </tr>
+          <tr>
+            <td>Killdate</td>
+            <td>{{ tableRecord.killDate }}</td>
+          </tr>
+          <tr>
+            <td>S.No</td>
+            <td>{{ tableRecord.sno }}</td>
+          </tr>
+          <tr>
+            <td>Product</td>
+            <td>{{ tableRecord.animal }}</td>
+          </tr>
+          <tr>
+            <td>RFID</td>
+            <td>{{ tableRecord.rfid }}</td>
+          </tr>
+          <tr>
+            <td>Notes</td>
+            <td>{{ tableRecord.notes }}</td>
+          </tr>
+          <tr>
+            <td
+              *ngIf="
+                !['Lamb', 'Sheep', 'Goat'].includes(tableRecord.animal);
+                else showHead
+              "
+            >
+              Weight
+            </td>
+            <ng-template #showHead>
+              <td>Head</td>
+            </ng-template>
+
+            <td>{{ tableRecord.weight }}</td>
+          </tr>
+          <tr>
+            <td>Condemnation</td>
+            <td>{{ tableRecord.condemnation }}</td>
+          </tr>
+          <tr>
+            <td>Sex</td>
+            <td>{{ tableRecord.sex }}</td>
+          </tr>
+          <tr>
+            <td>Breed</td>
+            <td>{{ tableRecord.breed }}</td>
+          </tr>
+          <tr>
+            <td>OTM</td>
+            <td>{{ tableRecord.otm }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

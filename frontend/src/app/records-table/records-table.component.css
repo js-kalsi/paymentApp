@@ -1,0 +1,18 @@
+.dropdown-menu {
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+  }
+  
+  .dropdown-item {
+    cursor: pointer;
+  }
+  
+  .position-relative {
+    position: relative;
+  }
+  
+  /* Optional delay to prevent dropdown from disappearing too quickly */
+  input:focus + .dropdown-menu {
+    display: block;
+  }
