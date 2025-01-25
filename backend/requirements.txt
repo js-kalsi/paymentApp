@@ -1,0 +1,5 @@
+fastapi
+uvicorn
+pycountry
+pymongo
+email-validator

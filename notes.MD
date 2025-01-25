@@ -83,3 +83,134 @@ db.createCollection("payment_info", {
 ```json
 db.payment_info.find();
 ```
+
+
+
+
+
+
+
+```python
+from fastapi import FastAPI, HTTPException, UploadFile, File, Query, Depends
+from fastapi.responses import FileResponse
+from pydantic import BaseModel, Field, EmailStr
+from typing import List, Optional
+from datetime import date, datetime
+from pymongo import MongoClient
+from bson import ObjectId
+from bson.errors import InvalidId
+import os
+from config import COLLECTION_NAME, DB_HOST, DB_PORT, DB_NAME
+
+app = FastAPI()
+
+# MongoDB Connection
+client = MongoClient(f"mongodb://{DB_HOST}:{DB_PORT}/")
+db = client[DB_NAME]
+payment_collection = db[COLLECTION_NAME]
+
+
+# Pydantic Models
+class PayeeAddress(BaseModel):
+    line_1: str
+    line_2: Optional[str]
+    city: str
+    province_or_state: Optional[str]
+    country: str
+    postal_code: str
+
+
+class PayeeContact(BaseModel):
+    phone_number: str
+    email: EmailStr
+
+
+class Payment(BaseModel):
+    payee_first_name: str
+    payee_last_name: str
+    payee_payment_status: str
+    payee_added_date_utc: int
+    payee_due_date: str
+    payee_address: PayeeAddress
+    payee_contact: PayeeContact
+    currency: str
+    discount_percent: Optional[float] = 0.0
+    tax_percent: Optional[float] = 0.0
+    due_amount: float
+    evidence_file: Optional[dict] = None
+    created_at: Optional[datetime] = Field(default_factory=datetime.utcnow)
+    updated_at: Optional[datetime] = Field(default_factory=datetime.utcnow)
+
+
+class UpdatePayment(BaseModel):
+    payee_first_name: Optional[str]
+    payee_last_name: Optional[str]
+    payee_payment_status: Optional[str]
+    payee_due_date: Optional[str]
+    payee_address: Optional[PayeeAddress]
+    payee_contact: Optional[PayeeContact]
+    currency: Optional[str]
+    discount_percent: Optional[float]
+    tax_percent: Optional[float]
+    due_amount: Optional[float]
+
+
+# Helper Functions
+def calculate_total_due(due_amount, discount_percent, tax_percent):
+    discount = due_amount * (discount_percent / 100)
+    tax = due_amount * (tax_percent / 100)
+    return round(due_amount - discount + tax, 2)
+
+
+# Routes
+@app.get("/get_payments")
+async def get_payments(
+    status: Optional[str] = None,
+    search: Optional[str] = None,
+    page: int = Query(1, ge=1),
+    limit: int = Query(10, ge=1),
+):
+    query = {}
+
+    # Filtering
+    if status:
+        query["payee_payment_status"] = status
+
+    # Searching
+    if search:
+        query["$or"] = [
+            {"payee_first_name": {"$regex": search, "$options": "i"}},
+            {"payee_last_name": {"$regex": search, "$options": "i"}},
+            {"payee_contact.email": {"$regex": search, "$options": "i"}},
+        ]
+
+    # Pagination
+    skip = (page - 1) * limit
+    payments = list(payment_collection.find(query).skip(skip).limit(limit))
+
+    # Post-fetch modifications
+    today = date.today()
+    for payment in payments:
+        due_date = datetime.strptime(payment["payee_due_date"], "%Y-%m-%d").date()
+        if due_date == today:
+            payment["payee_payment_status"] = "due_now"
+        elif due_date < today:
+            payment["payee_payment_status"] = "overdue"
+
+        payment["total_due"] = calculate_total_due(
+            payment["due_amount"],
+            payment.get("discount_percent", 0),
+            payment.get("tax_percent", 0),
+        )
+
+    return payments
+
+
+```
+
+
+
+```docker
+docker run -d -v mongodb_data:/data/db -p 27017:27017 --name=payment-info-db mongo:latest
+docker exec -it payment-info-db mongosh
+```
