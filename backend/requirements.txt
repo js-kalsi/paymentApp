@@ -3,3 +3,4 @@ uvicorn
 pycountry
 pymongo
 email-validator
+python-multipart
