@@ -17,24 +17,16 @@ db.createCollection("payment_info", {
   validator: {
     $jsonSchema: {
       bsonType: "object",
-      required: [
-        "payee_first_name", "payee_last_name", "payee_payment_status",
-        "payee_added_date_utc", "payee_due_date", "payee_address",
-        "payee_contact", "currency", "due_amount", "discount_percent",
-        "tax_percent"
-      ],
       properties: {
         payee_first_name: { bsonType: "string" },
         payee_last_name: { bsonType: "string" },
         payee_payment_status: {
-          bsonType: "string",
-          enum: ["completed", "due_now", "overdue", "pending"]
+          bsonType: "string"
         },
         payee_added_date_utc: { bsonType: "int" },
         payee_due_date: { bsonType: "string" },
         payee_address: {
           bsonType: "object",
-          required: ["line_1", "city", "country", "postal_code"],
           properties: {
             line_1: { bsonType: "string" },
             line_2: { bsonType: "string" },
@@ -46,7 +38,6 @@ db.createCollection("payment_info", {
         },
         payee_contact: {
           bsonType: "object",
-          required: ["phone_number", "email"],
           properties: {
             phone_number: { bsonType: "string" },
             email: { bsonType: "string" }
@@ -290,4 +281,17 @@ curl -X 'POST' \
                 "updated_at": "2025-01-24T12:00:00"
             }'
 
+
+curl -X PATCH "http://localhost:8000/update_payment/67947e30330cfdf232e6d006" \
+-H "Content-Type: application/json" \
+-d '{
+    "payee_first_name": "John Singh",
+    "payee_contact": { "phone_number": "+15146640997" }
+}'
+
+
+
+
 ```
+
+

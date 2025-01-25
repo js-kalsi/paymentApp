@@ -4,7 +4,7 @@ from datetime import datetime, timezone, date
 import time
 from bson import ObjectId
 from src.config import COLLECTION_NAME, DB_HOST, DB_PORT, DB_NAME
-from src.models import PaymentCreate, PaymentQuery
+from src.models import PaymentCreate, PaymentQuery, PaymentUpdate
 from src.helpers import calculate_total_due
 
 payment_router = APIRouter()
@@ -119,15 +119,46 @@ def delete_payment(payment_id: str):
     return {"message": "Payment deleted successfully"}
 
 
-# @payment_router.put("/update_payment/{payment_id}")
-# async def update_payment(payment_id: str, payment: PaymentUpdate):
-#     try:
-#         payment_id = ObjectId(payment_id)
-#     except InvalidId:
-#         raise HTTPException(status_code=400, detail="Invalid payment ID")
-#     update_data = payment.dict(exclude_unset=True)
-#     update_data["updated_at"] = datetime.utcnow()
-#     result = payment_collection.update_one({"_id": payment_id}, {"$set": update_data})
-#     if result.matched_count == 0:
-#         raise HTTPException(status_code=404, detail="Payment not found")
-#     return {"message": "Payment updated successfully"}
+@payment_router.patch("/update_payment/{payment_id}")
+async def update_payment(payment_id: str, payment_update: PaymentUpdate):
+    # Validate the payment ID
+    if not ObjectId.is_valid(payment_id):
+        raise HTTPException(status_code=400, detail="Invalid payment ID format")
+
+    # Find the existing payment document
+    payment = payment_collection.find_one({"_id": ObjectId(payment_id)})
+
+    if not payment:
+        raise HTTPException(status_code=404, detail="Payment not found")
+
+    # Prepare the updated data
+    update_data = payment_update.dict(
+        exclude_unset=True
+    )  # Include only provided fields
+
+    # Handle nested objects (e.g., payee_address and payee_contact)
+    if "payee_address" in update_data:
+        update_data["payee_address"] = {
+            **(payment.get("payee_address") or {}),  # Merge with existing data
+            **update_data["payee_address"],  # Overwrite with new data
+        }
+
+    if "payee_contact" in update_data:
+        update_data["payee_contact"] = {
+            **(payment.get("payee_contact") or {}),  # Merge with existing data
+            **update_data["payee_contact"],  # Overwrite with new data
+        }
+
+    # Update the `updated_at` field
+    update_data["updated_at"] = datetime.now(timezone.utc)
+
+    # Update the document in MongoDB
+    result = payment_collection.update_one(
+        {"_id": ObjectId(payment_id)},
+        {"$set": update_data},  # Update only the provided fields
+    )
+
+    if result.matched_count == 0:
+        raise HTTPException(status_code=404, detail="Payment not found")
+
+    return {"message": "Payment updated successfully", "payment_id": payment_id}

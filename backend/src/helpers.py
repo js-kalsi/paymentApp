@@ -1,3 +1,4 @@
+import re
 import pycountry
 from typing import Union, Any, Dict, List
 from bson import ObjectId
@@ -20,3 +21,9 @@ def calculate_total_due(
     discounted_amount = due_amount * (1 - discount_percent / 100)
     total_due = discounted_amount * (1 + tax_percent / 100)
     return round(total_due, 2)
+
+
+def validate_phone(phone_number):
+    """Validate phone number in E.164 format."""
+    pattern = re.compile(r"^\+?[1-9]\d{1,14}$")
+    return False if pattern is None else bool(pattern.match(phone_number))
