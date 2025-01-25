@@ -20,7 +20,8 @@ db.createCollection("payment_info", {
       required: [
         "payee_first_name", "payee_last_name", "payee_payment_status",
         "payee_added_date_utc", "payee_due_date", "payee_address",
-        "payee_contact", "currency", "due_amount"
+        "payee_contact", "currency", "due_amount", "discount_percent",
+        "tax_percent"
       ],
       properties: {
         payee_first_name: { bsonType: "string" },
@@ -65,7 +66,6 @@ db.createCollection("payment_info", {
         due_amount: { bsonType: "double", minimum: 0 },
         evidence_file: {
           bsonType: "object",
-          required: ["file_data", "file_name", "content_type"],
           properties: {
             file_data: { bsonType: "binData" },
             file_name: { bsonType: "string" },
@@ -213,4 +213,23 @@ async def get_payments(
 ```docker
 docker run -d -v mongodb_data:/data/db -p 27017:27017 --name=payment-info-db mongo:latest
 docker exec -it payment-info-db mongosh
+```
+
+
+```shell
+curl -X POST http://127.0.0.1:8000/add_payment \
+     -H "Content-Type: application/json" \
+     -d '{
+        "payee_first_name": "Jaspreet Singh",
+        "payee_last_name": "Kalsi",
+        "payee_address_line_1": "36 Eleanor Drive",
+        "payee_address_line_2": "Unit 4",
+        "payee_city": "Ottawa",
+        "payee_country": "Canada",
+        "payee_province_or_state": "Ontario",
+        "payee_postal_code": "K2E5Z7",
+        "payee_phone_number": "5146640997",
+        "payee_email": "flockbithamp@gmail.com",
+        "currency": Optional[str] = "CAD"
+         }'
 ```

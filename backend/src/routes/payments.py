@@ -1,10 +1,10 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from pymongo import MongoClient
-from datetime import date
-
+from datetime import datetime, timezone, date
+import time
 from bson import ObjectId
 from src.config import COLLECTION_NAME, DB_HOST, DB_PORT, DB_NAME
-from src.models import PaymentQuery
+from src.models import PaymentQuery, PaymentCreate
 from src.helpers import calculate_total_due
 
 payment_router = APIRouter()
@@ -83,4 +83,52 @@ def get_payments(params: PaymentQuery = Depends()):
         "page": params.page,
         "limit": params.limit,
         "total": payment_collection.count_documents(query),
+    }
+
+
+@payment_router.post("/add_payment")
+def add_payment(payment: PaymentCreate):
+    # Convert the Pydantic model to a dictionary
+    payment_data = payment.dict()
+    current_time = datetime.now(timezone.utc)
+    payment_row = {
+        "payee_first_name": payment_data["payee_first_name"],
+        "payee_last_name": payment_data["payee_last_name"],
+        "payee_payment_status": payment_data["payee_payment_status"],
+        "payee_added_date_utc": int(time.time()),
+        "payee_due_date": datetime.now().strftime("%Y-%m-%d"),
+        "payee_address": {
+            "line_1": payment_data["payee_address_line_1"],
+            "line_2": payment_data["payee_address_line_2"],
+            "city": payment_data["payee_city"],
+            "province_or_state": payment_data["payee_province_or_state"],
+            "country": payment_data["payee_country"],
+            "postal_code": payment_data["payee_postal_code"],
+        },
+        "payee_contact": {
+            "phone_number": payment_data["payee_phone_number"],
+            "email": payment_data["payee_email"],
+        },
+        "currency": payment_data["currency"],
+        "discount_percent": payment_data["discount_percent"],
+        "tax_percent": payment_data["tax_percent"],
+        "due_amount": payment_data["due_amount"],
+        "created_at": current_time,
+        "updated_at": current_time,
+    }
+
+    print("payment_row :>", payment_row)
+
+    # Insert into MongoDB
+    try:
+        result = payment_collection.insert_one(payment_row)
+    except Exception as e:
+        raise HTTPException(
+            status_code=500, detail=f"Failed to insert payment: {str(e)}"
+        )
+
+    # Return the inserted document's ID
+    return {
+        "message": "Payment entry added successfully",
+        "id": str(result.inserted_id),
     }
