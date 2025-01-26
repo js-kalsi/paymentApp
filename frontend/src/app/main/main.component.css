@@ -1,8 +1,18 @@
-#pdfTable hr {
-    height: 1px;
-    background-color: black;
-    margin: 0;
+.border-container {
+  border: 2px solid #000;
+  padding: 20px;
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  font-size: 18px;
 }
-#pdfTable table {
-    font-size: 12px;
+
+.border-container::before {
+  content: "Text inside the border";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+  color: #000;
 }

@@ -1,0 +1,308 @@
+<div class="container mt-5">
+  <button class="btn btn-primary mb-5">
+    <i class="bi bi-arrow-left" (click)="back()" style="font-size: 1.2em">
+      Back</i
+    >
+  </button>
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-xs-10">
+      <table
+        class="table table-bordered table-hover table-striped table-responsive"
+      >
+        <thead>
+          <tr>
+            <th class="text-primary">Fields</th>
+            <th class="text-primary">Values</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>First Name</td>
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="record.firstName"
+                (ngModelChange)="invalidForm = !record.firstName"
+                [ngClass]="{
+                  'form-control': true,
+                  'is-invalid': invalidForm && !record.firstName
+                }"
+              />
+              <div class="invalid-feedback" *ngIf="!record.firstName">
+                Please enter a valid First Name!
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Last Name</td>
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="record.lastName"
+                (ngModelChange)="invalidForm = !record.lastName"
+                [ngClass]="{
+                  'form-control': true,
+                  'is-invalid': invalidForm && !record.lastName
+                }"
+              />
+              <div class="invalid-feedback" *ngIf="!record.lastName">
+                Please enter a valid Last Name!
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Payment Status</td>
+            <td>
+              <select
+                [(ngModel)]="record.paymentStatus"
+                (ngModelChange)="invalidForm = !record.paymentStatus"
+                [ngClass]="{
+                  'form-select': true,
+                  'is-invalid': invalidForm && !record.paymentStatus
+                }"
+              >
+                <option value="">Select Payment Status</option>
+                <option
+                  *ngFor="let status of paymentStatusOptions"
+                  [value]="status.key"
+                >
+                  {{ status.value }}
+                </option>
+              </select>
+              <div class="invalid-feedback" *ngIf="!record.paymentStatus">
+                Please enter a valid Payment Status!
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Due Date</td>
+            <td>
+              <input
+                type="date"
+                [(ngModel)]="record.dueDate"
+                (ngModelChange)="invalidForm = !record.dueDate"
+                [ngClass]="{
+                  'form-control': true,
+                  'is-invalid': invalidForm && !record.dueDate
+                }"
+              />
+              <div class="invalid-feedback" *ngIf="!record.dueDate">
+                Please enter a valid Due Date!
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Address Line 1</td>
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="record.addressLine1"
+                (ngModelChange)="invalidForm = !record.addressLine1"
+                [ngClass]="{
+                  'form-control': true,
+                  'is-invalid': invalidForm && !record.addressLine1
+                }"
+              />
+              <div class="invalid-feedback" *ngIf="!record.addressLine1">
+                Please enter a valid Address Line 1!
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Address Line 2</td>
+            <td>
+              <input
+                class="form-control"
+                type="text"
+                [(ngModel)]="record.addressLine2"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>City</td>
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="record.city"
+                (ngModelChange)="invalidForm = !record.city"
+                [ngClass]="{
+                  'form-control': true,
+                  'is-invalid': invalidForm && !record.city
+                }"
+              />
+              <div class="invalid-feedback" *ngIf="!record.city">
+                Please enter a valid City!
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Country</td>
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="record.country"
+                (ngModelChange)="invalidForm = !record.country"
+                [ngClass]="{
+                  'form-control': true,
+                  'is-invalid': invalidForm && !record.country
+                }"
+              />
+              <div class="invalid-feedback" *ngIf="!record.country">
+                Please enter a valid Country!
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Province/State</td>
+            <td>
+              <input
+                class="form-control"
+                type="text"
+                [(ngModel)]="record.provinceOrState"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Postal Code</td>
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="record.postalCode"
+                (ngModelChange)="invalidForm = !record.postalCode"
+                [ngClass]="{
+                  'form-control': true,
+                  'is-invalid': invalidForm && !record.postalCode
+                }"
+              />
+              <div class="invalid-feedback" *ngIf="!record.postalCode">
+                Please enter a valid Postal Code!
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Phone Number</td>
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="record.phoneNumber"
+                (ngModelChange)="invalidForm = !record.phoneNumber"
+                [ngClass]="{
+                  'form-control': true,
+                  'is-invalid': invalidForm && !record.phoneNumber
+                }"
+                required
+              />
+              <div class="invalid-feedback" *ngIf="!record.phoneNumber">
+                Please enter a valid Phone Number!
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td>
+              <input
+                type="email"
+                [(ngModel)]="record.email"
+                (ngModelChange)="invalidForm = !record.email"
+                [ngClass]="{
+                  'form-control': true,
+                  'is-invalid': invalidForm && !record.email
+                }"
+                required
+              />
+              <div class="invalid-feedback" *ngIf="!record.email">
+                Please enter a valid Email!
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Currency</td>
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="record.currency"
+                (ngModelChange)="invalidForm = !record.currency"
+                [ngClass]="{
+                  'form-control': true,
+                  'is-invalid': invalidForm && !record.currency
+                }"
+              />
+              <div class="invalid-feedback" *ngIf="!record.currency">
+                Please enter a valid Currency!
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Discount %</td>
+            <td>
+              <input
+                class="form-control"
+                type="text"
+                [(ngModel)]="record.discountPercent"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Tax %</td>
+            <td>
+              <input
+                class="form-control"
+                type="text"
+                [(ngModel)]="record.taxPercent"
+              />
+            </td>
+          </tr>
+
+          <tr>
+            <td>Due Amount</td>
+            <td>
+              <input
+                type="number"
+                [(ngModel)]="record.dueAmount"
+                (ngModelChange)="invalidForm = !record.dueAmount"
+                [ngClass]="{
+                  'form-control': true,
+                  'is-invalid': invalidForm && !record.dueAmount
+                }"
+              />
+              <div class="invalid-feedback" *ngIf="!record.dueAmount">
+                Please enter a valid Due Amount!
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Proof of Payment</td>
+            <td>
+              <input
+                class="form-control"
+                type="file"
+                (change)="onFileChange($event)"
+                accept=".pdf, .png, .jpg, .jpeg"
+              />
+              <div *ngIf="record.evidenceFileURL">
+                <i class="bi bi-paperclip text-primary">
+                  <a href="{{ record.evidenceFileURL }}" class="text-primary"
+                    >Attachment</a
+                  >
+                </i>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <div class="d-grid gap-2 col-6 mx-auto">
+                <button
+                  class="btn btn-primary"
+                  (click)="updatePayment()"
+                  [disabled]="invalidForm"
+                >
+                  Update Record
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

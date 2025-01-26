@@ -1,0 +1,213 @@
+<div class="container mt-5">
+  <button class="btn btn-primary mb-5">
+    <i class="bi bi-arrow-left" (click)="back()" style="font-size: 1.2em">
+      Back</i
+    >
+  </button>
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-xs-10">
+      <table
+        class="table table-bordered table-hover table-striped table-responsive"
+      >
+        <thead>
+          <tr>
+            <th class="text-primary">Fields</th>
+            <th class="text-primary">Values</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>First Name</td>
+            <td>
+              <input
+                class="form-control"
+                type="text"
+                [(ngModel)]="record.firstName"
+                readonly
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Last Name</td>
+            <td>
+              <input
+                class="form-control"
+                type="text"
+                [(ngModel)]="record.lastName"
+                readonly
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Payment Status</td>
+            <td>
+              <input
+                class="form-control"
+                type="text"
+                [(ngModel)]="record.paymentStatus"
+                readonly
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Due Date</td>
+            <td>
+              <input
+                class="form-control"
+                type="text"
+                [(ngModel)]="record.dueDate"
+                readonly
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Address Line 1</td>
+            <td>
+              <input
+                class="form-control"
+                type="text"
+                [(ngModel)]="record.addressLine1"
+                readonly
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Address Line 2</td>
+            <td>
+              <input
+                class="form-control"
+                type="text"
+                [(ngModel)]="record.addressLine2"
+                readonly
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>City</td>
+            <td>
+              <input
+                class="form-control"
+                type="text"
+                [(ngModel)]="record.city"
+                readonly
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Country</td>
+            <td>
+              <input
+                class="form-control"
+                type="text"
+                [(ngModel)]="record.country"
+                readonly
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Province/State</td>
+            <td>
+              <input
+                class="form-control"
+                type="text"
+                [(ngModel)]="record.provinceOrState"
+                readonly
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Postal Code</td>
+            <td>
+              <input
+                class="form-control"
+                type="text"
+                [(ngModel)]="record.postalCode"
+                readonly
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Phone Number</td>
+            <td>
+              <input
+                class="form-control"
+                type="text"
+                [(ngModel)]="record.phoneNumber"
+                readonly
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td>
+              <input
+                class="form-control"
+                type="text"
+                [(ngModel)]="record.email"
+                readonly
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Currency</td>
+            <td>
+              <input
+                class="form-control"
+                type="text"
+                [(ngModel)]="record.currency"
+                readonly
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Discount %</td>
+            <td>
+              <input
+                class="form-control"
+                type="text"
+                [(ngModel)]="record.discountPercent"
+                readonly
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Tax %</td>
+            <td>
+              <input
+                class="form-control"
+                type="text"
+                [(ngModel)]="record.taxPercent"
+                readonly
+              />
+            </td>
+          </tr>
+
+          <tr>
+            <td>Due Amount</td>
+            <td>
+              <input
+                class="form-control"
+                type="text"
+                [(ngModel)]="record.discountPercent"
+                readonly
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Proof of Payment</td>
+            <td>
+              <div *ngIf="record.evidenceFileURL">
+                <i class="bi bi-paperclip text-primary">
+                  <a href="{{ record.evidenceFileURL }}" class="text-primary"
+                    >Attachment</a
+                  >
+                </i>
+              </div>
+              <p *ngIf="!record.evidenceFileURL">No Attachment Found!</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

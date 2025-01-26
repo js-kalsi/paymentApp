@@ -1,15 +1,12 @@
-import {Component} from '@angular/core';
-import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
-import {NavbarComponent} from './navbar/navbar.component';
-import {EntryModeComponent} from './entry-mode/entry-mode.component';
-import {RecordsComponent} from './records/records.component';
-import {FooterComponent} from './footer/footer.component';
-import {NgIf} from '@angular/common';
+import { Component } from '@angular/core';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { NavbarComponent } from './navbar/navbar.component';
+import { FooterComponent } from './footer/footer.component';;
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent, EntryModeComponent, FooterComponent, RecordsComponent, NgIf],
+  imports: [RouterOutlet, NavbarComponent, FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

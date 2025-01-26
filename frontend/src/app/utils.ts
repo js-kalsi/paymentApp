@@ -1,9 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import html2canvas from 'html2canvas';
-import { jsPDF } from 'jspdf';
-import { ElementRef, QueryList } from '@angular/core';
-import autoTable from "jspdf-autotable";
+import { recordInterface, backendRecordInterface } from './interfaces/edit.interface';
 
 export class Utils {
   months: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -44,36 +41,41 @@ export class Utils {
   }
 
 
-  unixTimestampToLocal = (timestamp: number, fullTimestamp: boolean = false, onlyDate: boolean = false): string => {
+  unixTimestampToLocal = (
+    timestamp: number,
+    fullTimestamp: boolean = false,
+    onlyDate: boolean = false
+  ): string => {
     const date = new Date(timestamp * 1000);
+
+    // Get the month name
+    const monthNames = [
+      "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
+    const month = monthNames[date.getMonth()];
+
+    // Extract day, year, and time components
+    const day = date.getDate();
     const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // months are zero-indexed
-    const day = String(date.getDate()).padStart(2, '0'); // ensure 2 digits for day
-    if (onlyDate) return `${this.months[date.getMonth()]} ${day} ${year}`;
-    if (fullTimestamp) return date.toString().split('GMT-')[0];
-    return `${year}-${month}-${day}`;
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+
+    // Format hours and minutes for 12-hour time
+    const period = hours >= 12 ? "PM" : "AM";
+    const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
+    const formattedMinutes = String(minutes).padStart(2, "0");
+
+    if (onlyDate) {
+      return `${month} ${day}, ${year}`;
+    }
+    if (fullTimestamp) {
+      return `${month} ${day}, ${year}, ${formattedHours}:${formattedMinutes} ${period}`;
+    }
+    return `${year}-${month}-${String(day).padStart(2, '0')}`;
   };
 
 
-  printPDFFromBlob(pdfUrl: string): void {
-    fetch(pdfUrl)
-      .then((response) => response.blob())
-      .then((blob) => {
-        const blobUrl = URL.createObjectURL(blob);
-
-        // Open in a new tab
-        const newTab = window.open(blobUrl, '_blank');
-
-        if (newTab) {
-          newTab.onload = () => {
-            newTab.print();
-          };
-        } else {
-          console.error('Failed to open new tab.');
-        }
-      })
-      .catch((error) => console.error('Error fetching PDF:', error));
-  }
 
   getUTCRangeByDate(date: string = 'today', timezone: string = Intl.DateTimeFormat().resolvedOptions().timeZone): {
     start: number,
@@ -169,103 +171,62 @@ export class Utils {
   }
 
 
-  generatePDFForSearchResult(tableContainer: ElementRef, tableElements: QueryList<ElementRef>) {
-    const tableDiv = tableContainer.nativeElement;
-    const logoSrc = './images/logo.png';
-    const watermarkSrc = './images/logobg.png';
-    if (!tableDiv) return;
-    tableDiv.hidden = false;
-    const pdf = new jsPDF('l', 'mm', 'a4');
-    pdf.setFont("helvetica");
-
-    setTimeout(() => {
-      const pdfPromises = tableElements.map((tableElement, index) =>
-        html2canvas(tableElement.nativeElement, { scale: 1 }) // Lower scale for smaller canvas size
-          .then((canvas) => {
-            if (index > 0) pdf.addPage();
-            // Convert the content to a compressed image
-            const contentImg = canvas.toDataURL('image/jpeg', 0.6); // JPEG format with 60% quality
-
-            // Get PDF dimensions
-            const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = pdf.internal.pageSize.getHeight();
-
-            // Add the logo at the top
-            const logoWidth = 22; // Adjust width as needed
-            const logoHeight = 25; // Adjust height as needed
-            pdf.addImage(logoSrc, 'JPEG', 10, 10, logoWidth, logoHeight);
-
-            // Add the content below the logo
-            const contentY = 10 + logoHeight; // Position content below logo
-            const contentWidth = pdfWidth - 20; // Adjust for margins
-            const contentHeight = (canvas.height * contentWidth) / canvas.width;
-            pdf.addImage(contentImg, 'JPEG', 10, contentY, contentWidth, contentHeight);
-
-            // Add the watermark on top
-            const watermarkWidth = 50; // Adjust watermark width
-            const watermarkHeight = 70; // Adjust watermark height
-            const watermarkX = (pdfWidth - watermarkWidth) / 2;
-            const watermarkY = (pdfHeight - watermarkHeight) / 2;
-
-            // Set transparency for the watermark
-            pdf.saveGraphicsState();
-            pdf.setGState(new (pdf.GState as any)({ opacity: 0.2 })); // Set 20% opacity
-            pdf.addImage(watermarkSrc, 'JPEG', watermarkX, watermarkY, watermarkWidth, watermarkHeight, "watermark", 'FAST');
-            pdf.restoreGraphicsState();
-          })
-          .catch((error) => {
-            console.error('Error generating PDF:', error);
-          })
-      );
-      Promise.all(pdfPromises).then(() => {
-        // pdf.save("farmreport.pdf");
-        tableDiv.hidden = true;
-      });
-    }, 50);
-    return pdf;
+  transformBackendPayloadToRecords(backendData: any[]): recordInterface[] {
+    return backendData.map(item => ({
+      id: item._id,
+      firstName: item.payee_first_name,
+      lastName: item.payee_last_name,
+      dueDate: item.payee_due_date,
+      paymentStatus: item.payee_payment_status,
+      addedDateUTC: item.payee_added_date_utc,
+      addressLine1: item.payee_address.line_1,
+      addressLine2: item.payee_address.line_2,
+      city: item.payee_address.city,
+      country: item.payee_address.country,
+      provinceOrState: item.payee_address.province_or_state,
+      postalCode: item.payee_address.postal_code,
+      phoneNumber: item.payee_contact.phone_number,
+      email: item.payee_contact.email,
+      currency: item.currency,
+      discountPercent: item.discount_percent || null,
+      taxPercent: item.tax_percent || null,
+      dueAmount: item.due_amount || null,
+      totalDue: item.due_amount || null,
+      evidenceFileURL: item.evidence_file_url
+    }));
   }
 
-
-
-  generatePDF(tableHead: any, tableBody: any) {
-    const doc = new jsPDF('l', 'mm', 'a4');
-    const logoImagePath = "./images/logo.png";
-    const watermarkImagePath = "./images/logobg.png";
-
-    const loadImage = (src: string): Promise<HTMLImageElement> => {
-      return new Promise((resolve, reject) => {
-        const img = new Image();
-        img.src = src;
-        img.onload = () => resolve(img);
-        img.onerror = (err) => reject(err);
-      });
-    };
-
-    Promise.all([loadImage(logoImagePath), loadImage(watermarkImagePath)])
-      .then(([logoImg, watermarkImg]) => {
-        const logoHeight = 25;
-        const logoY = 10;
-        const spacingAfterLogo = 2;
-        autoTable(doc, {
-          margin: { top: logoY + logoHeight + spacingAfterLogo },
-          head: tableHead,
-          body: tableBody,
-          styles: { fontSize: 7, },
-          didDrawPage: (data) => {
-            doc.addImage(logoImg, "JPEG", 10, logoY, 25, logoHeight);
-            doc.saveGraphicsState();
-            doc.setGState(new (doc.GState as any)({ opacity: 0.25 }));
-            doc.addImage(watermarkImg, "JPEG", 110, 65, 75, 90);
-            doc.restoreGraphicsState();
-          },
-        });
-        const pdfBlob = doc.output('blob');
-        const pdfUrl = URL.createObjectURL(pdfBlob);
-        window.open(pdfUrl, '_blank');
-      })
-      .catch((err) => {
-        console.error("Error loading images:", err);
-      });
+  transformRecordToBackendPayload(record: any): backendRecordInterface {
+    return {
+      _id: record.id,
+      payee_first_name: record.firstName,
+      payee_last_name: record.lastName,
+      payee_due_date: record.dueDate,
+      payee_payment_status: record.paymentStatus,
+      payee_added_date_utc: 12345,
+      payee_address: {
+        line_1: record.addressLine1,
+        line_2: record.addressLine2,
+        city: record.city,
+        country: record.country,
+        province_or_state: record.provinceOrState,
+        postal_code: record.postalCode
+      },
+      payee_contact: {
+        phone_number: record.phoneNumber,
+        email: record.email
+      },
+      evidence_file: {
+        file_data: record.evidenceFile?.fileData ?? null,
+        file_name: record.evidenceFile?.fileName ?? null,
+        content_type: record.evidenceFile?.contentType ?? null,
+      },
+      currency: record.currency,
+      discount_percent: record.discountPercent,
+      tax_percent: record.taxPercent,
+      due_amount: record.dueAmount,
+    }
   }
+
 
 }

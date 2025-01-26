@@ -62,7 +62,7 @@ class PaymentCreate(BaseModel):
     due_amount: Annotated[float, Field(default=0.0, ge=0)]
     discount_percent: Annotated[float, Field(default=0.0, ge=0, le=100)]
     tax_percent: Annotated[float, Field(default=0.0, ge=0, le=100)]
-    # evidence_file: Annotated[Optional[EvidenceFile], Field(default=None)]
+    evidence_file: EvidenceFile
     created_at: Annotated[Optional[datetime], Field(default=current_time)]
     updated_at: Annotated[Optional[datetime], Field(default=current_time)]
 

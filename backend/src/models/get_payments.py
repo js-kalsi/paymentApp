@@ -4,33 +4,14 @@ from fastapi import Query
 from pydantic.types import constr
 from datetime import datetime
 
-from src.helpers import validate_country, validate_currency
-
-
-def check_valid_country(value: str) -> str:
-    """Validates that the country code is a valid ISO 3166-1 alpha-2 code."""
-    if value and not validate_country(value):
-        raise ValueError(f"{value} is not a valid ISO 3166-1 alpha-2 country code.")
-    return value
-
-
-def check_valid_currency(value: str) -> str:
-    """Validates that the currency code is a valid ISO 4217 code."""
-    if value and not validate_currency(value):
-        raise ValueError(f"{value} is not a valid ISO 4217 currency code.")
-    return value
-
-
-def check_valid_payment_status(value: str) -> str:
-    if value and value not in ["completed", "due_now", "overdue", "pending"]:
-        raise ValueError(f"{value} is not a valid payment status.")
-    return value
-
 
 class PaymentQuery(BaseModel):
+    paymentId: Optional[str] = None
+    mode: str  # possible values: search/edit/view
     payee_first_name: Optional[str] = None
     payee_last_name: Optional[str] = None
     payee_payment_status: Optional[str] = None
+    payee_due_date: Optional[str] = None
     payee_address_line_1: Optional[str] = None
     payee_address_line_2: Optional[str] = None
     payee_city: Optional[str] = None
@@ -46,12 +27,3 @@ class PaymentQuery(BaseModel):
     # Page and limit values
     page: int = Query(1, ge=1)  # Default is 1, and must be >= 1
     limit: int = Query(10, ge=1)  # Default is 10, and must be >= 1
-
-    # Validators
-    _validate_country = validator("payee_country", allow_reuse=True)(
-        check_valid_country
-    )
-    _validate_currency = validator("currency", allow_reuse=True)(check_valid_currency)
-    _validate_payment_status = validator("payee_payment_status", allow_reuse=True)(
-        check_valid_payment_status
-    )

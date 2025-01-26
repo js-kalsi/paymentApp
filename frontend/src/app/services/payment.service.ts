@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { apiURL } from '../consts';
 import { Utils } from '../utils';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -14,31 +14,25 @@ export class PaymentService {
   constructor(private _http: HttpClient, private _utils: Utils) {
   }
 
-  getDataByBilledNo = (billedNo: string): Observable<any> => {
-    const params = new HttpParams().set('billed_no', billedNo);
-    return this._http.get<any>(`${apiURL}/api/payment/generate-summary-by-billed-no`, { params })
+  searchRecord = (payload: any) => {
+    let params = new HttpParams();
+    for (const key in payload) {
+      if (payload.hasOwnProperty(key)) {  // Ensure the key belongs to the object itself
+        params = params.set(key, payload[key]);
+      }
+    }
+
+    return this._http.get<any>(`${apiURL}/get_payments`, { params })
       .pipe(catchError(this._utils.handleError));
   };
 
-  removeDataByBilledNo = (billedNo: string): Observable<any> => {
-    const params = new HttpParams().set('billed_no', billedNo);
-    return this._http.delete<any>(`${apiURL}/api/payment/delete-billed-record`, { params })
-      .pipe(catchError(this._utils.handleError));
+  updateRecord = (record: any): Observable<any> => {
+    return this._http.put<any>(`${apiURL}/update_payment/${record._id}`, record).pipe(catchError(this._utils.handleError));
   };
 
-  getPayRecords = (data: any) => {
-    const params = new HttpParams()
-      .set('lot', data.lot)
-      .set('destination', data.destination)
-      .set('owner', data.owner)
-      .set('kill_date_from', data.kill_date_from)
-      .set('kill_date_to', data.kill_date_to);
-    return this._http.get<any>(`${apiURL}/api/payment/get-records`, { params })
-      .pipe(catchError(this._utils.handleError));
-  };
+  rmRecord = (payId: string): Observable<any> => {
+    return this._http.delete(`${apiURL}/delete_payment/${payId}`);
+  }
 
-  addToBilling = (payload: any): Observable<any> => {
-    console.log("payload :>", payload)
-    return this._http.post(`${apiURL}/api/payment/add-to-billing`, payload).pipe(catchError(this._utils.handleError));
-  };
+
 }

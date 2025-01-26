@@ -273,6 +273,11 @@ curl -X 'POST' \
                     "phone_number": "+14165555555",
                     "email": "johndoe@example.com"
                 },
+                    "evidence_file": {
+                    "file_data": null,
+                    "file_name": null,
+                    "content_type": null
+                 },
                 "currency": "CAD",
                 "due_amount": 150.75,
                 "discount_percent": 5.0,
