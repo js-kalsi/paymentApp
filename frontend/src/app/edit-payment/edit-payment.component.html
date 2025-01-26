@@ -119,23 +119,6 @@
             </td>
           </tr>
           <tr>
-            <td>City</td>
-            <td>
-              <input
-                type="text"
-                [(ngModel)]="record.city"
-                (ngModelChange)="invalidForm = !record.city"
-                [ngClass]="{
-                  'form-control': true,
-                  'is-invalid': invalidForm && !record.city
-                }"
-              />
-              <div class="invalid-feedback" *ngIf="!record.city">
-                Please enter a valid City!
-              </div>
-            </td>
-          </tr>
-          <tr>
             <td>Country</td>
             <td>
               <input
@@ -146,7 +129,28 @@
                   'form-control': true,
                   'is-invalid': invalidForm && !record.country
                 }"
+                placeholder="Search Country..."
+                (keyup)="filterCountries()"
+                (focus)="showDropdownCountries = true"
+                (blur)="hideDropdownWithDelayCountries()"
+                autocomplete="off"
               />
+              <ul
+                *ngIf="showDropdownCountries"
+                class="dropdown-menu show"
+                [ngClass]="{
+                  'd-none': filteredCountries.length === 0,
+        
+                }"
+              >
+                <li
+                  *ngFor="let country of filteredCountries"
+                  class="dropdown-item"
+                  (click)="selectCountry(country)"
+                >
+                  {{ country }}
+                </li>
+              </ul>
               <div class="invalid-feedback" *ngIf="!record.country">
                 Please enter a valid Country!
               </div>
@@ -156,10 +160,73 @@
             <td>Province/State</td>
             <td>
               <input
-                class="form-control"
                 type="text"
                 [(ngModel)]="record.provinceOrState"
+                (ngModelChange)="invalidForm = !record.country"
+                [ngClass]="{
+                  'form-control': true,
+                  'is-invalid': invalidForm && !record.country
+                }"
+                placeholder="Search Province/State..."
+                (keyup)="filterStates()"
+                (focus)="showDropdownStates = true"
+                (blur)="hideDropdownWithDelayStates()"
+                autocomplete="off"
               />
+              <ul
+                *ngIf="showDropdownStates"
+                class="dropdown-menu show"
+                [ngClass]="{
+                  'd-none': filteredStates.length === 0,
+        
+                }"
+              >
+                <li
+                  *ngFor="let state of filteredStates"
+                  class="dropdown-item"
+                  (click)="selectStates(state)"
+                >
+                  {{ state }}
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>City</td>
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="record.city"
+                (ngModelChange)="invalidForm = !record.city"
+                [ngClass]="{
+                  'form-control': true,
+                  'is-invalid': invalidForm && !record.city
+                }"
+                placeholder="Search City..."
+                (keyup)="filterCities()"
+                (focus)="showDropdownCities = true"
+                (blur)="hideDropdownWithDelayCities()"
+                autocomplete="off"
+              />
+              <ul
+                *ngIf="showDropdownCities"
+                class="dropdown-menu show"
+                [ngClass]="{
+                  'd-none': filteredCities.length === 0,
+        
+                }"
+              >
+                <li
+                  *ngFor="let city of filteredCities"
+                  class="dropdown-item"
+                  (click)="selectCities(city)"
+                >
+                  {{ city }}
+                </li>
+              </ul>
+              <div class="invalid-feedback" *ngIf="!record.city">
+                Please enter a valid City!
+              </div>
             </td>
           </tr>
           <tr>

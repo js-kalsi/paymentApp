@@ -57,3 +57,9 @@ export interface backendRecordInterface {
     tax_percent: number | null;
     due_amount: number | null;
 }
+
+
+export interface CountryRecord {
+    Iso2: string;
+    name: string;
+}

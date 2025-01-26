@@ -1,33 +1,19 @@
-html,
-body {
-  height: 100%;
+.dropdown-menu {
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  display: relative;
 }
 
-.form-signin {
-  max-width: 330px;
-  padding: 1rem;
+.dropdown-item {
+  cursor: pointer;
 }
 
-.form-signin .form-floating:focus-within {
-  z-index: 2;
+.position-relative {
+  position: relative;
 }
 
-.form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-.form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-
-#logo{
-  width: 8.6rem;
-}
-
-.mt-10{
-  margin-top: 10rem;
+/* Optional delay to prevent dropdown from disappearing too quickly */
+input:focus + .dropdown-menu {
+  display: block;
 }

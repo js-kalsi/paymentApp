@@ -7,7 +7,7 @@ import { Utils } from '../utils';
 import { recordInterface, backendRecordInterface } from '../interfaces/edit.interface';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms"
 import { ActivatedRoute } from '@angular/router';
-
+import { LocationService } from '../services/location.service';
 @Component({
   selector: 'app-edit-payment',
   standalone: true,
@@ -18,7 +18,7 @@ import { ActivatedRoute } from '@angular/router';
     FormsModule,
     NgClass,
   ],
-  providers: [PaymentService],
+  providers: [PaymentService, LocationService],
   templateUrl: './edit-payment.component.html',
   styleUrl: './edit-payment.component.css'
 })
@@ -27,7 +27,28 @@ export class EditPaymentComponent implements OnInit {
   paymentStatusOptions = paymentStatusOptions;
   invalidForm: boolean = false;
 
-  constructor(protected _utils: Utils, private _route: ActivatedRoute, private _router: Router, private _payService: PaymentService) {
+  countries: string[] = []; // Contains all the countries.
+  states: string[] = []; // Contains all the states/provinces by country.
+  cities: string[] = []; // Contains all the cities by country.
+
+
+  filteredCountries: string[] = [];
+  showDropdownCountries = false;
+
+  filteredStates: string[] = [];
+  showDropdownStates = false;
+
+  filteredCities: string[] = [];
+  showDropdownCities = false;
+
+
+
+
+  constructor(protected _utils: Utils,
+    private _route: ActivatedRoute,
+    private _router: Router,
+    private _payService: PaymentService,
+    private _locationService: LocationService) {
 
   }
 
@@ -46,28 +67,147 @@ export class EditPaymentComponent implements OnInit {
         },
       });
     });
+    this._locationService.getCountries().subscribe({
+      next: (response) => {
+        console.log("response:>", response.data);
+        this.countries = response.data.map((countryRecord: any) => countryRecord.Iso2);
+      },
+      error: (error) => {
+        console.error("Error in Location Service:", error);
+      },
+      complete: () => {
+      },
+    });
   }
 
   updatePayment() {
     console.log("this.record :>", this.record);
 
-    // const payload: backendRecordInterface = this._utils.transformRecordToBackendPayload(this.record);
-    // console.log("payload :>", payload);
-    // this._payService.updateRecord(payload).subscribe({
-    //   next: (response) => {
-    //     setTimeout(() => {
-    //       alert('Payment updated successfully!');
-    //       this._router.navigate(['/']); // Redirect to main component
-    //     }, 1000);
-    //   },
-    //   error: (error) => {
-    //     console.error("Error occurred:", error);
-    //   },
-    //   complete: () => {
-    //   },
-    // });
-
+    const payload: backendRecordInterface = this._utils.transformRecordToBackendPayload(this.record);
+    this._payService.updateRecord(payload).subscribe({
+      next: (response) => {
+        setTimeout(() => {
+          alert('Payment updated successfully!');
+          this._router.navigate(['/']); // Redirect to main component
+        }, 1000);
+      },
+      error: (error) => {
+        console.error("Error occurred:", error);
+      },
+      complete: () => {
+      },
+    });
   }
+
+
+  filterCountries(): void {
+    const searchTerm = this.record.country.trim().toLowerCase();
+    if (searchTerm.length > 0) {
+      this.filteredCountries = this.countries.filter((country) =>
+        country.toLowerCase().includes(searchTerm)
+      );
+      this.showDropdownCountries = this.filteredCountries.length > 0;
+    } else {
+      this.showDropdownCountries = false;
+    }
+  }
+  selectCountry(country: string): void {
+    this.record.country = country;
+    this.showDropdownCountries = false;
+
+    this._locationService.getCurrencies(this.record.country).subscribe({
+      next: (response) => {
+        if (!response.error) {
+          this.record.currency = response.data.currency;
+        }
+      },
+      error: (error) => {
+        console.error("Error in Location service while fetching currency:", error);
+      },
+    });
+
+    this._locationService.getStates(this.record.country).subscribe({
+      next: (response) => {
+        if (!response.error) {
+          this.states = response.data.states.map((state: any) => state.name);
+          this.record.provinceOrState = "";
+        }
+      },
+      error: (error) => {
+        console.error("Error in Location service while fetching currency:", error);
+      },
+    });
+  }
+
+  hideDropdownWithDelayCountries(): void {
+    setTimeout(() => {
+      this.showDropdownCountries = false;
+    }, 200);
+  }
+
+  // For Province/States
+  filterStates(): void {
+    const searchTerm = this.record.provinceOrState.trim().toLowerCase();
+    if (searchTerm.length > 0) {
+      this.filteredStates = this.states.filter((state) =>
+        state.toLowerCase().includes(searchTerm)
+      );
+      this.showDropdownStates = this.filteredStates.length > 0;
+    } else {
+      this.showDropdownStates = false;
+    }
+  }
+
+  hideDropdownWithDelayStates(): void {
+    setTimeout(() => {
+      this.showDropdownStates = false;
+    }, 200);
+  }
+
+  selectStates(state: string): void {
+    this.record.provinceOrState = state;
+    this.showDropdownStates = false;
+
+    this._locationService.getCities(this.record.country, this.record.provinceOrState).subscribe({
+      next: (response) => {
+        if (!response.error) {
+          console.log("response Cities :>", response)
+          this.cities = response.data;
+          this.record.city = "";
+        }
+      },
+      error: (error) => {
+        console.error("Error in Location service while fetching currency:", error);
+      },
+    });
+  }
+
+  // For City
+  filterCities(): void {
+    const searchTerm = this.record.city.trim().toLowerCase();
+    if (searchTerm.length > 0) {
+      this.filteredCities = this.cities.filter((state) =>
+        state.toLowerCase().includes(searchTerm)
+      );
+      this.showDropdownCities = this.filteredCities.length > 0;
+    } else {
+      this.showDropdownCities = false;
+    }
+  }
+
+  hideDropdownWithDelayCities(): void {
+    setTimeout(() => {
+      this.showDropdownCities = false;
+    }, 200);
+  }
+
+  selectCities(city: string): void {
+    this.record.city = city;
+    this.showDropdownCities = false;
+  }
+
+
+
 
   back = () => {
     this._router.navigate(['/']);
