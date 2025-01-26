@@ -32,7 +32,11 @@ export class PaymentService {
 
   rmRecord = (payId: string): Observable<any> => {
     return this._http.delete(`${apiURL}/delete_payment/${payId}`);
-  }
+  };
+
+  addRecord = (record: any): Observable<any> => {
+    return this._http.post<any>(`${apiURL}/add_payment`, record).pipe(catchError(this._utils.handleError));
+  };
 
 
 }

@@ -1,4 +1,9 @@
 <div class="container mt-5">
+  <div class="text-primary mt-5 text-center">
+    <h1 class="text-primary">
+      <strong>Add Record</strong>
+    </h1>
+  </div>
   <button class="btn btn-primary mb-5">
     <i class="bi bi-arrow-left" (click)="back()" style="font-size: 1.2em">
       Back</i
@@ -20,8 +25,8 @@
             <td>First Name</td>
             <td>
               <input
-                class="form-control"
                 type="text"
+                class="form-control"
                 [(ngModel)]="record.firstName"
               />
             </td>
@@ -30,8 +35,8 @@
             <td>Last Name</td>
             <td>
               <input
-                class="form-control"
                 type="text"
+                class="form-control"
                 [(ngModel)]="record.lastName"
               />
             </td>
@@ -39,8 +44,8 @@
           <tr>
             <td>Payment Status</td>
             <td>
-              <select class="form-select" [(ngModel)]="record.paymentStatus">
-                <option>Select Payment Status</option>
+              <select [(ngModel)]="record.paymentStatus" class="form-control">
+                <option value="">Select Payment Status</option>
                 <option
                   *ngFor="let status of paymentStatusOptions"
                   [value]="status.key"
@@ -54,8 +59,8 @@
             <td>Due Date</td>
             <td>
               <input
+                type="date"
                 class="form-control"
-                type="text"
                 [(ngModel)]="record.dueDate"
               />
             </td>
@@ -64,8 +69,8 @@
             <td>Address Line 1</td>
             <td>
               <input
-                class="form-control"
                 type="text"
+                class="form-control"
                 [(ngModel)]="record.addressLine1"
               />
             </td>
@@ -81,41 +86,108 @@
             </td>
           </tr>
           <tr>
-            <td>City</td>
-            <td>
-              <input
-                class="form-control"
-                type="text"
-                [(ngModel)]="record.city"
-              />
-            </td>
-          </tr>
-          <tr>
             <td>Country</td>
             <td>
               <input
-                class="form-control"
                 type="text"
+                class="form-control"
                 [(ngModel)]="record.country"
+                placeholder="Search Country..."
+                (keyup)="filterCountries()"
+                (focus)="showDropdownCountries = true"
+                (blur)="hideDropdownWithDelayCountries()"
+                autocomplete="off"
               />
+              <ul
+                *ngIf="showDropdownCountries"
+                class="dropdown-menu show"
+                [ngClass]="{
+                  'd-none': filteredCountries.length === 0,
+        
+                }"
+              >
+                <li
+                  *ngFor="let country of filteredCountries"
+                  class="dropdown-item"
+                  (click)="selectCountry(country)"
+                >
+                  {{ country }}
+                </li>
+              </ul>
             </td>
           </tr>
           <tr>
             <td>Province/State</td>
             <td>
               <input
-                class="form-control"
                 type="text"
+                class="form-control"
                 [(ngModel)]="record.provinceOrState"
+                placeholder="Search Province/State..."
+                (keyup)="filterStates()"
+                (focus)="showDropdownStates = true"
+                (blur)="hideDropdownWithDelayStates()"
+                autocomplete="off"
               />
+              <ul
+                *ngIf="showDropdownStates"
+                class="dropdown-menu show"
+                [ngClass]="{
+                  'd-none': filteredStates.length === 0,
+        
+                }"
+              >
+                <li
+                  *ngFor="let state of filteredStates"
+                  class="dropdown-item"
+                  (click)="selectStates(state)"
+                >
+                  {{ state }}
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>City</td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="record.city"
+                [ngClass]="{
+                  'form-control': true,
+                  'is-invalid': invalidForm && !record.city
+                }"
+                placeholder="Search City..."
+                (keyup)="filterCities()"
+                (focus)="showDropdownCities = true"
+                (blur)="hideDropdownWithDelayCities()"
+                autocomplete="off"
+              />
+              <ul
+                *ngIf="showDropdownCities"
+                class="dropdown-menu show"
+                [ngClass]="{
+                  'd-none': filteredCities.length === 0,
+        
+                }"
+              >
+                <li
+                  *ngFor="let city of filteredCities"
+                  class="dropdown-item"
+                  (click)="selectCities(city)"
+                >
+                  {{ city }}
+                </li>
+              </ul>
             </td>
           </tr>
           <tr>
             <td>Postal Code</td>
             <td>
               <input
-                class="form-control"
                 type="text"
+                class="form-control"
                 [(ngModel)]="record.postalCode"
               />
             </td>
@@ -124,9 +196,10 @@
             <td>Phone Number</td>
             <td>
               <input
-                class="form-control"
                 type="text"
+                class="form-control"
                 [(ngModel)]="record.phoneNumber"
+                required
               />
             </td>
           </tr>
@@ -134,9 +207,10 @@
             <td>Email</td>
             <td>
               <input
+                type="email"
                 class="form-control"
-                type="text"
                 [(ngModel)]="record.email"
+                required
               />
             </td>
           </tr>
@@ -175,9 +249,9 @@
             <td>Due Amount</td>
             <td>
               <input
+                type="number"
                 class="form-control"
-                type="text"
-                [(ngModel)]="record.discountPercent"
+                [(ngModel)]="record.dueAmount"
               />
             </td>
           </tr>
@@ -190,20 +264,17 @@
                 (change)="onFileChange($event)"
                 accept=".pdf, .png, .jpg, .jpeg"
               />
-              <div *ngIf="record.evidenceFileURL">
-                <i class="bi bi-paperclip text-primary">
-                  <a href="{{ record.evidenceFileURL }}" class="text-primary"
-                    >Attachment</a
-                  >
-                </i>
-              </div>
             </td>
           </tr>
           <tr>
             <td colspan="2">
               <div class="d-grid gap-2 col-6 mx-auto">
-                <button class="btn btn-primary" (click)="updatePayment()">
-                  Update Record
+                <button
+                  class="btn btn-primary"
+                  (click)="addPayment()"
+                  [disabled]="invalidForm"
+                >
+                  Add Record
                 </button>
               </div>
             </td>

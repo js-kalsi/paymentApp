@@ -1,12 +1,10 @@
 type Base64 = string;
 
 export interface recordInterface {
-    id?: string
     firstName: string;
     lastName: string
     paymentStatus: string;
     dueDate: string;
-    addedDateUTC: number | null;
     addressLine1: string;
     addressLine2: string;
     city: string;
@@ -29,12 +27,10 @@ export interface recordInterface {
 }
 
 export interface backendRecordInterface {
-    _id: string;
     payee_first_name: string;
     payee_last_name: string;
     payee_due_date: string;
     payee_payment_status: string;
-    payee_added_date_utc: number;
     payee_address: {
         line_1: string;
         line_2: string;

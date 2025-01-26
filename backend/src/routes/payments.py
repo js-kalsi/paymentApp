@@ -134,7 +134,6 @@ def get_payments(request: Request, params: PaymentQuery = Depends()):
 def create_payment(payment: PaymentCreate):
     # Convert the Pydantic model to a dictionary
     payment_data = payment.dict()
-    print("payment_data :>", payment_data)
 
     # Insert into MongoDB
     try:
