@@ -22,10 +22,10 @@ export interface recordInterface {
     totalDue?: Number | null;
     evidenceFileURL: string | null,
     evidenceFile?: {
-        fileData: Base64 | null,
-        fileName: string | null,
-        contentType: string | undefined | null,
-    },
+        fileData?: Base64 | null,
+        fileName?: string | null,
+        contentType?: string | undefined | null,
+    } | null;
 }
 
 export interface backendRecordInterface {

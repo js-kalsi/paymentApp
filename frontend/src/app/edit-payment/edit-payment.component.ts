@@ -58,18 +58,50 @@ export class EditPaymentComponent implements OnInit {
       this._payService.searchRecord({ paymentId: paymentId, mode: 'edit' }).subscribe({
         next: (response) => {
           this.record = this._utils.transformBackendPayloadToRecords(response.data)[0];
-          console.log("this.record:>", this.record);
         },
         error: (error) => {
           console.error("Error in search:", error);
         },
         complete: () => {
+          this._locationService.getCurrencies(this.record.country).subscribe({
+            next: (response) => {
+              if (!response.error) {
+                this.record.currency = response.data.currency;
+              }
+            },
+            error: (error) => {
+              console.error("Error in Location service while fetching currency:", error);
+            },
+          });
+
+          this._locationService.getStates(this.record.country).subscribe({
+            next: (response) => {
+              if (!response.error) {
+                this.states = [];
+                this.states = response.data.states.map((state: any) => state.name);
+              }
+            },
+            error: (error) => {
+              console.error("Error in Location service while fetching currency:", error);
+            },
+          });
+
+          this._locationService.getCities(this.record.country, this.record.provinceOrState).subscribe({
+            next: (response) => {
+              if (!response.error) {
+                this.cities = []
+                this.cities = response.data;
+              }
+            },
+            error: (error) => {
+              console.error("Error in Location service while fetching currency:", error);
+            },
+          });
         },
       });
     });
     this._locationService.getCountries().subscribe({
       next: (response) => {
-        console.log("response:>", response.data);
         this.countries = response.data.map((countryRecord: any) => countryRecord.Iso2);
       },
       error: (error) => {
@@ -81,7 +113,10 @@ export class EditPaymentComponent implements OnInit {
   }
 
   updatePayment() {
-    console.log("this.record :>", this.record);
+    if (!this.record.hasOwnProperty('evidenceFile') && this.record.paymentStatus === "completed") {
+      alert("Missing Proof of Payment. PaymentStatus can't be set to Completed!");
+      return;
+    }
 
     const payload: backendRecordInterface = this._utils.transformRecordToBackendPayload(this.record);
     this._payService.updateRecord(payload).subscribe({
@@ -129,6 +164,7 @@ export class EditPaymentComponent implements OnInit {
     this._locationService.getStates(this.record.country).subscribe({
       next: (response) => {
         if (!response.error) {
+          this.states = [];
           this.states = response.data.states.map((state: any) => state.name);
           this.record.provinceOrState = "";
         }
@@ -171,7 +207,7 @@ export class EditPaymentComponent implements OnInit {
     this._locationService.getCities(this.record.country, this.record.provinceOrState).subscribe({
       next: (response) => {
         if (!response.error) {
-          console.log("response Cities :>", response)
+          this.cities = [];
           this.cities = response.data;
           this.record.city = "";
         }
@@ -206,14 +242,12 @@ export class EditPaymentComponent implements OnInit {
     this.showDropdownCities = false;
   }
 
-
-
-
   back = () => {
     this._router.navigate(['/']);
   }
 
   onFileChange(event: any) {
+    this.record.evidenceFile = null;
     const file = event.target.files[0]; // Get the selected file
     if (file) {
       const fileType = file.type;
@@ -239,39 +273,5 @@ export class EditPaymentComponent implements OnInit {
       reader.readAsDataURL(file); // Read file as Base64
     }
   }
-
-  validateForm = () => {
-    if (this.record.firstName) {
-
-    } else if (this.record.lastName) {
-
-    } else if (this.record.dueDate) {
-
-    } else if (this.record.paymentStatus) {
-
-    } else if (this.record.addressLine1) {
-
-    }
-
-    else if (this.record.city) {
-
-    } else if (this.record.country) {
-
-    } else if (this.record.postalCode) {
-
-    } else if (this.record.phoneNumber) {
-
-    }
-
-    else if (this.record.email) {
-
-    } else if (this.record.currency) {
-
-    } else if (this.record.dueAmount) {
-
-    }
-
-  }
-
 
 }
